@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>12 Gear | Project Istanbul lo-fi</title>
+<link rel="stylesheet" href="lofi.css"><script src="lofi.js" defer></script>
+</head>
+<body>
+<nav class="pager" id="pager" aria-label="Screens"></nav>
+<div class="page">
+  <main class="phone" aria-label="Phone: gear and merge">
+    <div class="screen">
+      <div class="seg" role="tablist"><a href="11-skills.html">Skills</a><a href="12-gear.html" aria-current="true">Gear</a></div>
+      <div style="display:grid;grid-template-columns:70px 1fr 70px;gap:var(--s2);align-items:center">
+        <div class="col"><div class="slot uncommon">GLOVES<span class="lvl">L8</span></div><div class="slot">JACKET<span class="lvl">L5</span></div></div>
+        <div class="ph" style="height:170px">ARDA<br>(idle animation,<br>shows equipped gear)</div>
+        <div class="col"><div class="slot">SHOES<span class="lvl">L4</span></div><div class="slot rare">BAG<span class="lvl">L2</span></div></div>
+      </div>
+      <div class="grid2 panel" style="font-size:13px">
+        <span>Might <b>+12%</b></span><span>Max HP <b>148</b></span>
+        <span>Move <b>+5%</b></span><span>Pickup <b>1.8 m</b></span>
+      </div>
+      <div class="row between"><span class="title">Inventory</span><span class="cap">Sort: rarity</span></div>
+      <div class="grid3" style="grid-template-columns:repeat(5,1fr)">
+        <div class="slot" style="box-shadow:0 0 0 3px var(--simit-gold)">GLOVES</div>
+        <div class="slot" style="box-shadow:0 0 0 3px var(--simit-gold)">GLOVES</div>
+        <div class="slot" style="box-shadow:0 0 0 3px var(--simit-gold)">GLOVES</div>
+        <div class="slot uncommon">SHOES</div><div class="slot">JACKET</div>
+        <div class="slot">BAG</div><div class="slot">SHOES</div><div class="slot lock"></div><div class="slot lock"></div><div class="slot lock"></div>
+      </div>
+      <div class="panel col">
+        <div class="row"><span class="badge evo">Merge ready</span><span class="cap">3 × Common Gloves → 1 Uncommon Gloves (×1.6 stat)</span></div>
+        <a class="btn primary wide" href="12-gear.html">Merge</a>
+      </div>
+      <div class="fill"></div>
+      <nav class="tabbar" aria-label="Main">
+        <a href="02-world-map.html"><span></span>Map</a>
+        <a href="11-skills.html" aria-current="page"><span></span>Squad</a>
+        <a href="10-workshop.html"><span></span>Workshop</a>
+        <a href="13-bazaar.html"><span></span>Bazaar</a>
+        <a href="15-store.html"><span></span>Store</a>
+      </nav>
+    </div>
+  </main>
+  <section class="notes">
+    <h1>12 Gear + merge</h1>
+    <p class="ref">Specs: game-design.md 8.6 · design-system.md 3.3, 13</p>
+    <ol>
+      <li>Four slots around the hero (Gloves, Jacket, Shoes, Backpack). Rarity = frame color <b>and</b> a pip cue (design-system 3.3).</li>
+      <li><b>Merge-ready</b> items glow gold and a single Merge button appears: 3 identical → next rarity.</li>
+      <li>Gear sources: first clears, star chests, boss clears and the Bazaar (deterministic). <b>No paid random gear chests.</b></li>
+      <li>Upgrading a slot (tap it) costs Jeton + Hurda, shown as an exact before/after.</li>
+    </ol>
+  </section>
+</div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>06 Boss fight | Project Istanbul lo-fi</title>
+<link rel="stylesheet" href="lofi.css"><script src="lofi.js" defer></script>
+</head>
+<body>
+<nav class="pager" id="pager" aria-label="Screens"></nav>
+<div class="page">
+  <main class="phone" aria-label="Phone: Vatman boss fight with tram rush telegraph">
+    <img class="game-bg" src="gameplay-peak.svg" alt="">
+    <div class="lane" aria-hidden="true"></div>
+    <div class="ring" style="left:40px;top:300px;width:120px;height:120px" aria-hidden="true"></div>
+    <div class="ph" style="position:absolute;z-index:6;left:150px;top:126px;width:90px;height:90px;background-color:#DEDEDE">VATMAN<br>on the red tram</div>
+    <div class="hud-top">
+      <div class="row">
+        <div class="bar hp" style="width:120px"><b style="width:64%"></b></div>
+        <span class="hud-chip">Lv 14</span>
+        <a class="btn round" href="07-pause.html" aria-label="Pause" style="min-height:40px;width:40px;margin-left:auto">II</a>
+      </div>
+      <div class="col" style="gap:3px">
+        <div class="row between"><span class="hud-chip">THE VATMAN</span><span class="hud-chip">Phase 1 of 3</span></div>
+        <div class="bar boss" style="height:12px;position:relative"><b style="width:78%"></b>
+          <i style="position:absolute;left:60%;top:0;bottom:0;width:2px;background:#14151F"></i>
+          <i style="position:absolute;left:25%;top:0;bottom:0;width:2px;background:#14151F"></i></div>
+      </div>
+    </div>
+    <span class="zone-note" style="top:240px;left:236px">TRAM RUSH lane: 1.2 s warning</span>
+    <span class="zone-note" style="top:428px;left:46px">Bell shockwave: 0.8 s</span>
+    <span class="toast" style="top:200px;background:var(--danger)">Get off the tracks!</span>
+    <a class="ult" href="08-results-win.html" aria-label="Ultimate ready">ULT</a>
+  </main>
+  <section class="notes">
+    <h1>06 Boss fight: The Vatman (L10)</h1>
+    <p class="ref">Specs: content-catalog.md 6 · design-system.md 6.3 · game-design.md 4.7</p>
+    <ol>
+      <li><b>Boss bar</b>: name, phase label, and notches at the phase thresholds (60%, 25%), always under the XP area.</li>
+      <li><b>Tram Rush</b>: the whole rail lane glows hatched red for 1.2 s, then the tram crosses. It also kills every zombie in its path, so <b>luring zombies onto the tracks is the skill expression</b>.</li>
+      <li>Every boss attack telegraph is ≥ 0.8 s, exact shape = exact hit area, and the edge fills toward impact.</li>
+      <li>One contextual warning toast at most, only for the first occurrence of each attack.</li>
+      <li>The screen pauses for nothing: the phase-change beat is a 0.6 s camera zoom-out, not a cutscene.</li>
+    </ol>
+  </section>
+</div>
+</body>
+</html>

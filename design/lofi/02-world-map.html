@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>02 World map | Project Istanbul lo-fi</title>
+<link rel="stylesheet" href="lofi.css"><script src="lofi.js" defer></script>
+</head>
+<body>
+<nav class="pager" id="pager" aria-label="Screens"></nav>
+<div class="page">
+  <main class="phone" aria-label="Phone: world map">
+    <div class="screen">
+      <div class="topbar">
+        <div class="row">
+          <span class="chip"><i></i>2,340</span>
+          <span class="chip"><i style="background:var(--stone)"></i>85</span>
+          <a class="chip altin" href="15-store.html"><i></i>120 +</a>
+        </div>
+        <a class="btn round" href="16-settings.html" aria-label="Settings">SET</a>
+      </div>
+      <a class="panel row between" href="14-road-pass.html" style="text-decoration:none">
+        <div class="col" style="gap:4px;flex:1">
+          <span class="cap">ROAD PASS · Galata Nights · 18 days</span>
+          <div class="bar"><b style="width:68%"></b></div>
+        </div>
+        <strong style="margin-left:12px">Tier 4</strong>
+      </a>
+      <div class="fill" style="position:relative">
+        <svg viewBox="0 0 358 470" width="100%" height="100%" role="img" aria-label="Route map: Taksim to Atakoy, district 1 nodes">
+          <rect width="358" height="470" rx="16" fill="#E6E2D8"/>
+          <path d="M20 90 Q120 40 200 70 T340 60" fill="none" stroke="#B8C7D3" stroke-width="22"/>
+          <text x="250" y="40" font-size="11" fill="#6E6E6E" font-family="system-ui">Golden Horn</text>
+          <path d="M300 420 C250 380 270 330 220 300 S120 260 150 210 S240 160 190 120 S90 90 60 60" fill="none" stroke="#14151F" stroke-width="3" stroke-dasharray="8 6"/>
+          <g font-family="system-ui" font-size="10" font-weight="700" text-anchor="middle">
+            <circle cx="300" cy="420" r="13" fill="#14151F"/><text x="300" y="424" fill="#fff">1</text>
+            <circle cx="262" cy="365" r="13" fill="#14151F"/><text x="262" y="369" fill="#fff">2</text>
+            <circle cx="232" cy="310" r="13" fill="#14151F"/><text x="232" y="314" fill="#fff">3</text>
+            <circle cx="180" cy="280" r="16" fill="#fff" stroke="#3DDCFF" stroke-width="4"/><text x="180" y="284">4</text>
+            <circle cx="140" cy="232" r="15" fill="#fff" stroke="#14151F" stroke-width="2"/><text x="140" y="236">5</text>
+            <circle cx="170" cy="190" r="13" fill="#DEDEDE"/><text x="170" y="194" fill="#6E6E6E">6</text>
+            <circle cx="215" cy="150" r="13" fill="#DEDEDE"/><text x="215" y="154" fill="#6E6E6E">7</text>
+            <circle cx="160" cy="112" r="13" fill="#DEDEDE"/><text x="160" y="116" fill="#6E6E6E">8</text>
+            <circle cx="105" cy="92" r="13" fill="#DEDEDE"/><text x="105" y="96" fill="#6E6E6E">9</text>
+            <rect x="40" y="40" width="40" height="40" rx="10" fill="#DEDEDE" stroke="#FF4D2E" stroke-width="3"/><text x="60" y="64" fill="#6E6E6E">BOSS</text>
+          </g>
+          <g font-family="system-ui" font-size="9" fill="#6E6E6E" text-anchor="middle">
+            <text x="300" y="447">3 stars</text><text x="262" y="392">2 stars</text><text x="232" y="337">3 stars</text>
+            <text x="140" y="260">MINI-BOSS</text>
+          </g>
+          <circle cx="180" cy="252" r="9" fill="#D7263D" stroke="#14151F" stroke-width="2"/>
+          <text x="196" y="250" font-size="10" font-weight="700" font-family="system-ui">Arda</text>
+          <text x="20" y="455" font-size="11" fill="#6E6E6E" font-family="system-ui">Taksim (start) -> Tunel -> Karakoy -> ... Atakoy</text>
+        </svg>
+      </div>
+      <div class="panel col">
+        <div class="row between"><strong>District 1: Istiklal</strong><span class="cap">0.9 / 17 km</span></div>
+        <div class="bar"><b style="width:5%"></b></div>
+      </div>
+      <a class="btn primary wide" href="03-level-start.html">Play Level 4 · Arena</a>
+      <nav class="tabbar" aria-label="Main">
+        <a href="02-world-map.html" aria-current="page"><span></span>Map</a>
+        <a href="11-skills.html"><span></span>Squad</a>
+        <a href="10-workshop.html"><span></span>Workshop</a>
+        <a href="13-bazaar.html"><span></span>Bazaar</a>
+        <a href="15-store.html"><span></span>Store</a>
+      </nav>
+    </div>
+  </main>
+  <section class="notes">
+    <h1>02 World map (home screen)</h1>
+    <p class="ref">Specs: prd.md US-7.1 · game-design.md 8.1, 8.10 · design-system.md 13</p>
+    <ol>
+      <li><b>The map is home.</b> The route from Taksim to Ataköy is the progress bar for the whole chapter; "0.9 / 17 km" makes the journey tangible.</li>
+      <li>Node states: cleared (dark, star count), <b>current</b> (cyan ring + Arda token), available, locked (gray), mini-boss (outlined), boss (red-bordered square). Never color alone: shape and labels too.</li>
+      <li>Currency chips: Jeton, Hurda, Altın. Only Altın has a "+" (opens the store). Tapping any chip shows where it comes from.</li>
+      <li>The Road Pass banner is the only promo surface on the map. <b>Max one pop-up offer per session</b>, never on top of the Play button (game-design.md 8.14).</li>
+      <li>The tab bar has 5 items, each ≥ 48 pt. "Squad" opens Skills/Gear.</li>
+      <li>The illustrated map replaces this SVG in M4; node positions follow the real geography.</li>
+    </ol>
+  </section>
+</div>
+</body>
+</html>

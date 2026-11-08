@@ -76,15 +76,18 @@ tokens are swapped; brand art stays. Every semantic token already has a non-colo
 
 ## 4. Typography
 
-| Role | Font (candidate) | Size at 1080 px ref | Notes |
+Sizes are given in **iOS points (pt)** and in px at the 1080 px reference (1 pt ≈ 2.77 px there).
+*Revised 2026-11-08 after wireframing: the v0.1 sizes were below iOS readability at phone scale.*
+
+| Role | Font (candidate) | Size (pt / ref px) | Notes |
 |---|---|---|---|
-| Display (titles, logo lockups) | Barlow Condensed ExtraBold | 96 | All-caps allowed, but follow Turkish casing (§10) |
-| H1 | Barlow Condensed Bold | 64 | |
-| Title | Barlow Condensed SemiBold | 44 | |
-| Body | Inter Medium | 32 | Default UI text |
-| Caption (minimum) | Inter Medium | 28 | **Never smaller than 28 px at reference** |
-| Damage numbers | Barlow Condensed Black | 36 (normal) / 48 (crit) / 56 (boss crit) | Outlined |
-| Comic lettering (bubbles, SFX) | TBD hand-lettered font | 36+ | Must pass the glyph test |
+| Display (titles, logo lockups) | Barlow Condensed ExtraBold | 40 / 111 | All-caps allowed, but follow Turkish casing (§10) |
+| H1 | Barlow Condensed Bold | 26 / 72 | |
+| Title | Barlow Condensed SemiBold | 20 / 55 | |
+| Body | Inter Medium | 16 / 44 | Default UI text |
+| Caption (minimum) | Inter Medium | 12 / 33 | **Never smaller than 12 pt** |
+| Damage numbers | Barlow Condensed Black | 14 / 18 / 22 (normal / crit / boss crit) | Outlined |
+| Comic lettering (bubbles, SFX) | TBD hand-lettered font | 15+ | Must pass the glyph test |
 
 **Glyph test (mandatory for every font):** `ĞÜŞİÖÇ ğüşıöç İstanbul ılık şoför Çatal ŞANGIR`
 (+ Greek `Αθήνα` later for the Athens spin-off). A font that fails is rejected.
@@ -92,7 +95,9 @@ Text size setting scales all text by 100 / 125 / 150%; layouts must not clip at 
 
 ## 5. Layout, Spacing and HUD Zones
 
-- **Reference canvas:** 1080 × 2340 portrait. Respect device safe areas (notch, home indicator).
+- **Reference canvas:** 1080 × 2340 portrait (= 390 × 844 pt, iPhone 14/15 class). Respect safe
+  areas (Dynamic Island ≈ 59 pt top, home indicator ≈ 34 pt bottom).
+- **Wireframes:** `design/lofi/` shows every key screen at 390 × 844 pt with annotations.
 - **Spacing grid:** 8 px. Common steps: 8 / 16 / 24 / 32 / 48 / 64.
 - **Touch targets:** ≥ 48 dp (≈ 132 px at reference), ≥ 16 px gap between targets.
 - **Corner radius:** 16 px panels, 999 px pills, 24 px cards.

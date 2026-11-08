@@ -1,0 +1,208 @@
+/* Project Istanbul: low-fi wireframe styles.
+   Tokens mirror docs/design-system.md (section 3 colors, section 4 type in pt, section 5 spacing).
+   Wireframes are deliberately grayscale; color is used ONLY for gameplay-semantic tokens and the
+   primary action, so the visual hierarchy is what you see, not decoration. */
+
+:root {
+  /* brand (design-system 3.1) */
+  --tram-red: #D7263D; --simit-gold: #E9A23B; --tea-amber: #B5651D;
+  --bosphorus: #1B4965; --ink: #14151F; --paper: #F4EBDD; --stone: #8A8F98;
+  /* gameplay semantics (3.2) */
+  --player: #3DDCFF; --danger: #FF4D2E; --xp-s: #5BD16E; --xp-m: #3D8BFF; --xp-l: #8E7CFF;
+  --heal: #FFD166; --elite: #E040FB;
+  /* rarity (3.3) */
+  --r-common: #B0B0B0; --r-uncommon: #4CAF50; --r-rare: #3D8BFF; --r-epic: #A259FF;
+  /* lo-fi grays */
+  --g0: #FFFFFF; --g1: #F2F2F2; --g2: #DEDEDE; --g3: #B8B8B8; --g4: #6E6E6E; --g5: #3A3A3A;
+  /* type in pt == CSS px at 390 wide (4) */
+  --t-cap: 12px; --t-body: 16px; --t-title: 20px; --t-h1: 26px; --t-display: 40px;
+  /* spacing grid (5) */
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px; --s6: 32px;
+  --tap: 48px; /* minimum touch target */
+  --safe-top: 59px; --safe-bottom: 34px;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: var(--s5); background: #D9D6CF; color: var(--ink);
+  font: 400 var(--t-body)/1.35 -apple-system, "Inter", system-ui, sans-serif;
+}
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--player); outline-offset: 2px; }
+
+/* ---------- page shell: phone + annotation column ---------- */
+.page { display: flex; gap: var(--s6); align-items: flex-start; flex-wrap: wrap; }
+.pager { display: flex; gap: var(--s4); margin-bottom: var(--s4); font-size: var(--t-cap); }
+.pager a { text-decoration: none; padding: var(--s2) var(--s3); background: var(--g0); border-radius: 999px; }
+.notes { max-width: 380px; font-size: 14px; }
+.notes h1 { font-size: var(--t-h1); margin: 0 0 var(--s2); }
+.notes ol { padding-left: 20px; }
+.notes li { margin-bottom: var(--s2); }
+.notes code { background: var(--g0); padding: 0 4px; border-radius: 4px; }
+.notes .ref { color: var(--g4); font-size: var(--t-cap); }
+
+/* ---------- the phone (390 x 844 pt) ---------- */
+.phone {
+  position: relative; width: 390px; height: 844px; flex: none; overflow: hidden;
+  border-radius: 48px; background: var(--g1); border: 10px solid var(--ink);
+  box-shadow: 0 20px 50px rgba(0,0,0,.25);
+}
+.phone::before { /* Dynamic Island */
+  content: ""; position: absolute; top: 11px; left: 50%; transform: translateX(-50%);
+  width: 120px; height: 34px; background: #000; border-radius: 20px; z-index: 50;
+}
+.phone::after { /* home indicator */
+  content: ""; position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
+  width: 134px; height: 5px; background: var(--g5); border-radius: 3px; z-index: 50;
+}
+.screen { position: absolute; inset: 0; padding: var(--safe-top) var(--s4) var(--safe-bottom); display: flex; flex-direction: column; gap: var(--s3); }
+.screen.dark { background: var(--g5); color: var(--g0); }
+.fill { flex: 1; min-height: 0; }
+
+/* ---------- typography ---------- */
+.display { font-size: var(--t-display); font-weight: 800; letter-spacing: .5px; line-height: 1; text-transform: uppercase; }
+.h1 { font-size: var(--t-h1); font-weight: 700; }
+.title { font-size: var(--t-title); font-weight: 600; }
+.cap { font-size: var(--t-cap); color: var(--g4); }
+.dark .cap { color: var(--g3); }
+.center { text-align: center; }
+
+/* ---------- placeholders ---------- */
+.ph { /* image/illustration placeholder */
+  display: grid; place-items: center; text-align: center; padding: var(--s2);
+  background: repeating-linear-gradient(45deg, var(--g2) 0 10px, var(--g1) 10px 20px);
+  border: 1.5px dashed var(--g3); border-radius: 12px; color: var(--g4); font-size: var(--t-cap);
+}
+.icon { /* icon placeholder: short label in a rounded square */
+  display: inline-grid; place-items: center; width: 40px; height: 40px; flex: none;
+  background: var(--g2); border-radius: 10px; font-size: 10px; font-weight: 700; color: var(--g5);
+}
+.icon.lg { width: 64px; height: 64px; font-size: 11px; }
+
+/* ---------- buttons (design-system 13) ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--s2);
+  min-height: var(--tap); padding: 0 var(--s5); border-radius: 999px; border: 2px solid var(--ink);
+  font-weight: 700; font-size: var(--t-body); text-decoration: none; background: var(--g0); color: var(--ink);
+}
+.btn.primary { background: var(--tram-red); border-color: var(--tram-red); color: var(--g0); }
+.btn.ghost { background: transparent; }
+.btn.wide { width: 100%; }
+.btn.ad::before { content: "AD"; font-size: 10px; padding: 1px 5px; border-radius: 4px; background: var(--ink); color: var(--g0); }
+.btn.round { width: var(--tap); padding: 0; }
+
+/* ---------- panels, rows, chips ---------- */
+.panel { background: var(--g0); border-radius: 16px; padding: var(--s3); }
+.dark .panel { background: #4A4A4A; }
+.row { display: flex; align-items: center; gap: var(--s2); }
+.row.between { justify-content: space-between; }
+.col { display: flex; flex-direction: column; gap: var(--s2); }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s2); }
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s2); }
+.chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px 4px 4px; background: var(--g0); border-radius: 999px; font-size: var(--t-cap); font-weight: 700; color: var(--ink); }
+.chip i { width: 20px; height: 20px; border-radius: 50%; background: var(--g3); display: inline-block; }
+.chip.altin i { background: var(--simit-gold); }
+.badge { align-self: flex-start; width: max-content; font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 6px; background: var(--ink); color: var(--g0); text-transform: uppercase; }
+.badge.evo { background: var(--simit-gold); color: var(--ink); }
+.lock { opacity: .45; }
+
+/* ---------- top bar / bottom tab bar ---------- */
+.topbar { display: flex; align-items: center; justify-content: space-between; gap: var(--s2); }
+.tabbar { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; background: var(--g0); border-radius: 20px; padding: 6px; }
+.tabbar a { display: flex; flex-direction: column; align-items: center; gap: 2px; min-height: var(--tap); justify-content: center; font-size: 11px; font-weight: 600; text-decoration: none; border-radius: 14px; }
+.tabbar a[aria-current="page"] { background: var(--g2); }
+.tabbar a span { width: 22px; height: 22px; border-radius: 6px; background: var(--g3); }
+
+/* ---------- bars, pips, stars ---------- */
+.bar { height: 10px; border-radius: 6px; background: var(--g2); overflow: hidden; }
+.bar > b { display: block; height: 100%; background: var(--g5); }
+.bar.hp > b { background: var(--tram-red); }
+.bar.xp > b { background: var(--xp-s); }
+.bar.boss > b { background: linear-gradient(90deg, var(--danger), #FFC93C); }
+.pips { display: inline-flex; gap: 3px; }
+.pips i { width: 10px; height: 10px; border-radius: 3px; background: var(--g2); border: 1px solid var(--g4); }
+.pips i.on { background: var(--ink); }
+.star { display: inline-block; width: 28px; height: 28px; background: var(--g3);
+  clip-path: polygon(50% 0, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); }
+.star.on { background: var(--simit-gold); }
+.star.sm { width: 14px; height: 14px; }
+
+/* ---------- rarity frames (3.3: color + pip shape cue) ---------- */
+.slot { position: relative; aspect-ratio: 1; border-radius: 14px; border: 3px solid var(--r-common); background: var(--g0); display: grid; place-items: center; font-size: 10px; font-weight: 700; color: var(--g4); }
+.slot.uncommon { border-color: var(--r-uncommon); } .slot.rare { border-color: var(--r-rare); } .slot.epic { border-color: var(--r-epic); }
+.slot .lvl { position: absolute; bottom: 3px; right: 5px; font-size: 10px; color: var(--ink); }
+
+/* ---------- overlays ---------- */
+.scrim { position: absolute; inset: 0; background: rgba(20,21,31,.62); z-index: 20; }
+.sheet { position: absolute; left: 0; right: 0; bottom: 0; z-index: 30; padding: var(--s4) var(--s4) calc(var(--safe-bottom) + var(--s3)); background: var(--g1); border-radius: 28px 28px 0 0; display: flex; flex-direction: column; gap: var(--s3); }
+.toast { position: absolute; top: 110px; left: 50%; transform: translateX(-50%); z-index: 25; background: var(--ink); color: var(--g0); padding: var(--s2) var(--s4); border-radius: 999px; font-size: var(--t-cap); font-weight: 700; white-space: nowrap; }
+
+/* ---------- gameplay HUD (design-system 5) ---------- */
+.game-bg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.hud-top { position: absolute; top: var(--safe-top); left: var(--s3); right: var(--s3); z-index: 10; display: flex; flex-direction: column; gap: 6px; }
+.hud-top .bar { height: 8px; }
+.hud-chip { background: rgba(20,21,31,.72); color: var(--g0); border-radius: 999px; padding: 3px 10px; font-size: var(--t-cap); font-weight: 700; }
+.joystick { position: absolute; z-index: 10; width: 86px; height: 86px; border-radius: 50%; border: 3px solid rgba(255,255,255,.7); background: rgba(255,255,255,.18); }
+.joystick::after { content: ""; position: absolute; width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,.8); left: 34px; top: 10px; }
+.ult { position: absolute; right: var(--s4); bottom: calc(var(--safe-bottom) + 24px); z-index: 10; width: 64px; height: 64px; border-radius: 50%; background: var(--simit-gold); border: 3px solid var(--g0); display: grid; place-items: center; font-size: 11px; font-weight: 800; }
+.portraits { position: absolute; left: var(--s4); bottom: calc(var(--safe-bottom) + 24px); z-index: 10; display: flex; flex-direction: column; gap: var(--s2); }
+.portraits i { width: 48px; height: 48px; border-radius: 50%; background: var(--g2); border: 3px solid var(--xp-s); display: grid; place-items: center; font-size: 10px; font-style: normal; font-weight: 800; }
+.zone-note { position: absolute; z-index: 15; font-size: 10px; font-weight: 700; background: #FFF3B0; color: var(--ink); padding: 2px 6px; border-radius: 4px; border: 1px solid #C9B44A; }
+
+/* ---------- level-up cards (design-system 13) ---------- */
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s2); }
+.lcard { background: var(--g0); border-radius: 20px; padding: var(--s3) var(--s2); display: flex; flex-direction: column; align-items: center; gap: var(--s2); text-align: center; border: 3px solid transparent; text-decoration: none; min-height: 250px; }
+.lcard.hl { border-color: var(--simit-gold); box-shadow: 0 0 0 4px rgba(233,162,59,.35); }
+.lcard .desc { font-size: var(--t-cap); color: var(--g5); }
+
+/* ---------- comic / letter ---------- */
+.comic { display: grid; gap: 6px; background: var(--ink); padding: 6px; border-radius: 6px; }
+.comic .ph { border-radius: 2px; border: 3px solid var(--ink); background-color: var(--paper); }
+.bubble { position: relative; background: var(--g0); color: var(--ink); border: 2px solid var(--ink); border-radius: 18px; padding: var(--s2) var(--s3); font-weight: 600; }
+.bubble::after { content: ""; position: absolute; bottom: -10px; left: 28px; border: 10px solid transparent; border-top-color: var(--ink); border-bottom: 0; }
+.paper { background: var(--paper); color: var(--ink); border-radius: 6px; padding: var(--s5) var(--s4); box-shadow: 0 6px 18px rgba(0,0,0,.3); font-family: "Bradley Hand", "Segoe Print", cursive; font-size: 17px; line-height: 1.5; }
+
+/* ---------- board (index.html) ---------- */
+.board { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: var(--s5); }
+.board a { text-decoration: none; display: flex; flex-direction: column; gap: var(--s2); }
+.board .thumb { width: 230px; height: 498px; overflow: hidden; border-radius: 24px; position: relative; background: var(--g0); }
+.board iframe { width: 390px; height: 844px; border: 0; transform: scale(.59); transform-origin: 0 0; pointer-events: none; position: absolute; top: 0; left: 0; }
+.board .num { font-size: var(--t-cap); color: var(--g4); }
+.only-phone .notes, .only-phone .pager { display: none; }
+.only-phone { padding: 0; background: transparent; }
+.only-phone .phone { border: 0; border-radius: 0; box-shadow: none; }
+
+/* ---------- controls ---------- */
+.seg { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; background: var(--g2); border-radius: 999px; padding: 3px; gap: 3px; }
+.seg a, .seg span { min-height: 36px; display: grid; place-items: center; border-radius: 999px; font-size: var(--t-cap); font-weight: 700; text-decoration: none; }
+.seg [aria-current="true"], .seg .on { background: var(--g0); box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+.toggle { width: 51px; height: 31px; border-radius: 999px; background: var(--g3); position: relative; flex: none; }
+.toggle::after { content: ""; position: absolute; top: 2px; left: 2px; width: 27px; height: 27px; border-radius: 50%; background: var(--g0); }
+.toggle.on { background: var(--xp-s); }
+.toggle.on::after { left: 22px; }
+.setting { display: flex; align-items: center; justify-content: space-between; gap: var(--s2); min-height: var(--tap); border-bottom: 1px solid var(--g2); font-size: 15px; }
+.slider { width: 130px; height: 6px; border-radius: 3px; background: linear-gradient(90deg, var(--ink) 70%, var(--g3) 70%); }
+
+/* ---------- signal bars (story HUD) ---------- */
+.signal { display: inline-flex; align-items: flex-end; gap: 2px; height: 12px; }
+.signal i { width: 3px; background: currentColor; opacity: .3; border-radius: 1px; }
+.signal i:nth-child(1) { height: 4px; } .signal i:nth-child(2) { height: 7px; }
+.signal i:nth-child(3) { height: 10px; } .signal i:nth-child(4) { height: 12px; }
+.signal i.on { opacity: 1; }
+
+/* ---------- skill tree ---------- */
+.tree { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px 8px; position: relative; }
+.tree .head { font-size: var(--t-cap); font-weight: 800; text-align: center; text-transform: uppercase; color: var(--g4); }
+.node { justify-self: center; width: 52px; height: 52px; border-radius: 50%; background: var(--g0); border: 3px solid var(--g3); display: grid; place-items: center; font-size: 9px; font-weight: 800; text-align: center; line-height: 1.05; position: relative; }
+.node.learned { border-color: var(--ink); background: var(--g2); }
+.node.sel { box-shadow: 0 0 0 4px var(--player); }
+.node.locked { opacity: .4; }
+.node .pips { position: absolute; bottom: -7px; }
+.node .pips i { width: 7px; height: 7px; }
+.node.cap { width: 64px; height: 64px; grid-column: 1 / -1; border-color: var(--simit-gold); }
+
+/* ---------- boss telegraphs ---------- */
+.lane { position: absolute; z-index: 5; top: 116px; bottom: 0; left: 160px; width: 70px;
+  background: repeating-linear-gradient(45deg, rgba(255,77,46,.20) 0 10px, rgba(255,77,46,.45) 10px 16px);
+  border-left: 3px solid var(--danger); border-right: 3px solid var(--danger); }
+.ring { position: absolute; z-index: 5; border-radius: 50%; border: 4px dashed var(--danger); background: rgba(255,77,46,.12); }

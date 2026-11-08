@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>07 Pause | Project Istanbul lo-fi</title>
+<link rel="stylesheet" href="lofi.css"><script src="lofi.js" defer></script>
+</head>
+<body>
+<nav class="pager" id="pager" aria-label="Screens"></nav>
+<div class="page">
+  <main class="phone" aria-label="Phone: pause menu">
+    <img class="game-bg" src="gameplay-peak.svg" alt="">
+    <div class="scrim"></div>
+    <div class="screen" style="z-index:30;justify-content:center">
+      <div class="panel col" style="gap:var(--s3)">
+        <div class="row between"><span class="h1">Paused</span><span class="cap">Level 4 · 2:31</span></div>
+        <a class="btn primary wide" href="04-run-hud.html">Resume</a>
+        <a class="btn wide" href="16-settings.html">Settings</a>
+        <a class="btn wide" href="04-run-hud.html">Restart level</a>
+        <a class="btn ghost wide" href="02-world-map.html">Quit to map</a>
+        <span class="cap">Quitting keeps 50% of the Jeton earned so far.</span>
+      </div>
+      <div class="panel col">
+        <span class="cap">CURRENT BUILD (tap an item for details)</span>
+        <div class="grid3" style="grid-template-columns:repeat(6,1fr)">
+          <div class="slot" style="font-size:8px">FORK<span class="lvl">3</span></div>
+          <div class="slot" style="font-size:8px">TEA<span class="lvl">5</span></div>
+          <div class="slot" style="font-size:8px">SIMIT<span class="lvl">3</span></div>
+          <div class="slot" style="font-size:8px">TEAPOT<span class="lvl">1</span></div>
+          <div class="slot" style="font-size:8px">AYRAN<span class="lvl">2</span></div>
+          <div class="slot" style="font-size:8px">SHOES<span class="lvl">1</span></div>
+        </div>
+        <span class="cap">Evolution ready: Tea Glass + Teapot (next boss chest)</span>
+      </div>
+    </div>
+  </main>
+  <section class="notes">
+    <h1>07 Pause</h1>
+    <p class="ref">Specs: design-system.md 11 · game-design.md 3, 5.5</p>
+    <ol>
+      <li>Pause works <b>anywhere</b>, including boss fights and cinematics (accessibility checklist).</li>
+      <li>The app pauses automatically when it goes to the background (phone call, notification).</li>
+      <li>"Quit to map" asks nothing extra; the cost (50% Jeton kept) is written right there, not in a pop-up.</li>
+      <li>Build summary with tap-for-details lets players learn items without leaving the run.</li>
+    </ol>
+  </section>
+</div>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>05 Level-up cards | Project Istanbul lo-fi</title>
+<link rel="stylesheet" href="lofi.css"><script src="lofi.js" defer></script>
+</head>
+<body>
+<nav class="pager" id="pager" aria-label="Screens"></nav>
+<div class="page">
+  <main class="phone" aria-label="Phone: level-up card choice">
+    <img class="game-bg" src="gameplay-peak.svg" alt="">
+    <div class="scrim"></div>
+    <div class="screen" style="z-index:30;color:#fff;justify-content:center">
+      <div class="center col" style="align-items:center;gap:2px">
+        <span class="display" style="font-size:34px">Level up!</span>
+        <span class="cap" style="color:#ddd">Run level 8 · game paused</span>
+      </div>
+      <div class="cards" style="color:var(--ink)">
+        <a class="lcard hl" href="04-run-hud.html">
+          <span class="badge evo">EVO ready</span>
+          <span class="icon lg">TEAPOT</span>
+          <strong>Teapot</strong>
+          <span class="badge">New</span>
+          <span class="desc">+8% area. Pairs with Tea Glass (L5): next boss chest evolves it.</span>
+        </a>
+        <a class="lcard" href="04-run-hud.html">
+          <span class="icon lg">SKEWER</span>
+          <strong>Döner Skewer</strong>
+          <span class="badge">New</span>
+          <span class="desc">Pierces everything in a 6 m line in front of you.</span>
+        </a>
+        <a class="lcard" href="04-run-hud.html">
+          <span class="icon lg">SIMIT</span>
+          <strong>Simit</strong>
+          <span class="pips" aria-label="Level 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span>
+          <span class="desc">L3: +1 projectile.</span>
+        </a>
+      </div>
+      <div class="row" style="justify-content:center">
+        <a class="btn" href="05-level-up.html">Reroll (1 free)</a>
+        <a class="btn ad" href="05-level-up.html">Reroll</a>
+      </div>
+      <div class="panel col" style="color:var(--ink)">
+        <span class="cap">YOUR BUILD · weapons 3/6 · passives 2/6</span>
+        <div class="grid3" style="grid-template-columns:repeat(6,1fr)">
+          <div class="slot" style="font-size:8px">FORK<span class="lvl">3</span></div>
+          <div class="slot" style="font-size:8px">TEA<span class="lvl">5</span></div>
+          <div class="slot" style="font-size:8px">SIMIT<span class="lvl">2</span></div>
+          <div class="slot lock"></div><div class="slot lock"></div><div class="slot lock"></div>
+        </div>
+        <div class="grid3" style="grid-template-columns:repeat(6,1fr)">
+          <div class="slot" style="font-size:8px">AYRAN<span class="lvl">2</span></div>
+          <div class="slot" style="font-size:8px">SHOES<span class="lvl">1</span></div>
+          <div class="slot lock"></div><div class="slot lock"></div><div class="slot lock"></div><div class="slot lock"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <section class="notes">
+    <h1>05 Level-up cards</h1>
+    <p class="ref">Specs: game-design.md 5.1-5.6 · design-system.md 7, 13 · prd.md US-3.1, US-3.2</p>
+    <ol>
+      <li>The game is <b>paused</b>; a 0.3 s slow-mo ramp leads into this screen.</li>
+      <li>Three cards, weighted per game-design.md 5.3. <b>Tap = select</b> (no confirm step): fast, and accidental picks are rare at this card size.</li>
+      <li>The <b>EVO ready</b> badge + gold border appears when a pick completes an evolution pair. It teaches the system without a tutorial.</li>
+      <li>Rerolls: 1 free per run, then rewarded ad (max 3 per run). Monthly Card holders reroll without ads.</li>
+      <li>The build strip shows open slots, so players can plan (6 weapons, 6 passives).</li>
+      <li>At 150% text size, the cards stack vertically (design-system.md 13).</li>
+    </ol>
+  </section>
+</div>
+</body>
+</html>

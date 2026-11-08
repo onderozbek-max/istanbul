@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>04 In-run HUD | Project Istanbul lo-fi</title>
+<link rel="stylesheet" href="lofi.css"><script src="lofi.js" defer></script>
+</head>
+<body>
+<nav class="pager" id="pager" aria-label="Screens"></nav>
+<div class="page">
+  <main class="phone" aria-label="Phone: in-run HUD at peak density">
+    <img class="game-bg" src="gameplay-peak.svg" alt="Gameplay at peak density: about 70 zombies around the player on Istiklal Avenue">
+    <div class="hud-top">
+      <div class="row">
+        <div class="col" style="gap:3px;width:150px">
+          <div class="bar hp"><b style="width:86%"></b></div>
+          <span class="hud-chip" style="align-self:flex-start">86 / 100</span>
+        </div>
+        <span class="hud-chip">0:42 HOLD</span>
+        <span class="hud-chip row" style="gap:6px">Anne 02:14 <span class="signal" aria-label="1 bar"><i class="on"></i><i></i><i></i><i></i></span></span>
+        <a class="btn round" href="07-pause.html" aria-label="Pause" style="min-height:40px;width:40px;margin-left:auto">II</a>
+      </div>
+      <div class="row"><div class="bar xp" style="flex:1"><b style="width:72%"></b></div><span class="hud-chip">Lv 7</span></div>
+    </div>
+    <span class="zone-note" style="top:228px;left:250px">shutter = timer</span>
+    <span class="zone-note" style="top:470px;left:262px">telegraph: hatched, edge fills</span>
+    <span class="zone-note" style="top:378px;left:58px">tea splash</span>
+    <span class="zone-note" style="top:600px;left:222px">player ring + pickup radius</span>
+    <span class="zone-note" style="top:282px;left:200px">elite (crown)</span>
+    <div class="joystick" style="left:96px;top:690px" aria-hidden="true"></div>
+    <a class="ult" href="05-level-up.html" aria-label="Ultimate, 70 percent charged">ULT 70%</a>
+  </main>
+  <section class="notes">
+    <h1>04 In-run HUD (peak chaos)</h1>
+    <p class="ref">Specs: design-system.md 5, 6, 7 · game-design.md 2 · level-001-istiklal.md 7, 9</p>
+    <ol>
+      <li><b>This is the readability test frame</b> (Level 1, Segment D peak). If you can find the player in under 1 second here, the hierarchy works: player &gt; telegraphs &gt; enemies &gt; pickups &gt; our VFX &gt; environment.</li>
+      <li>The <b>top band</b> holds everything: HP, hold timer, the story call widget with draining signal bars, pause, and the XP bar with run level. The middle 60% stays clean.</li>
+      <li>The joystick appears <b>where the thumb lands</b> (lower 60%). It's drawn here for illustration only.</li>
+      <li>Ultimate bottom-right; squad portraits will sit bottom-left from L30 (mirrored in left-handed mode).</li>
+      <li><b>The shutter rising is the timer</b>: diegetic progress first, plus a thin bar for clarity.</li>
+      <li>The yellow labels are wireframe annotations, not UI.</li>
+    </ol>
+  </section>
+</div>
+</body>
+</html>

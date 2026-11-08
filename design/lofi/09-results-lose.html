@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>09 Results lose | Project Istanbul lo-fi</title>
+<link rel="stylesheet" href="lofi.css"><script src="lofi.js" defer></script>
+</head>
+<body>
+<nav class="pager" id="pager" aria-label="Screens"></nav>
+<div class="page">
+  <main class="phone" aria-label="Phone: defeat with revive offer">
+    <img class="game-bg" src="gameplay-peak.svg" alt="" style="filter:grayscale(1) brightness(.6)">
+    <div class="screen" style="z-index:30;color:#fff">
+      <div class="center col" style="align-items:center;margin-top:var(--s6)">
+        <span class="display">Down!</span>
+        <span class="cap" style="color:#ddd">Level 4 · 3:12 survived</span>
+      </div>
+      <div class="panel row" style="color:var(--ink)">
+        <span class="icon lg">EXPL</span>
+        <div class="col" style="gap:2px"><span class="cap">CAUSE</span><strong>Exploder blast</strong>
+          <span class="cap">Tip: exploders glow red before they burst. Step out of the circle.</span></div>
+      </div>
+      <div class="fill"></div>
+      <div class="panel col" style="color:var(--ink)">
+        <span class="title">Keep going?</span>
+        <a class="btn ad wide" href="04-run-hud.html">Revive (full HP)</a>
+        <a class="btn wide" href="04-run-hud.html">Revive · 20 Altın</a>
+        <span class="cap center">1 revive per run · reviving costs your no-revive star</span>
+      </div>
+      <a class="btn ghost wide" href="02-world-map.html" style="border-color:#fff;color:#fff">Give up (keep 64 Jeton)</a>
+    </div>
+  </main>
+  <section class="notes">
+    <h1>09 Results: lose + revive</h1>
+    <p class="ref">Specs: game-design.md 3, 7, 8.13, 8.14 · business-plan.md 5.1</p>
+    <ol>
+      <li><b>Failing should teach</b>: cause of death (from telemetry) + one tip, before any offer.</li>
+      <li>Revive: rewarded ad <b>or</b> 20 Altın, once per run. The cost to the "no revive" star is stated honestly.</li>
+      <li>"Give up" keeps 50% of the Jeton earned, so a loss still moves meta progress forward.</li>
+      <li>The <b>Boss Helper</b> offer appears only after failing the <b>same boss twice</b>, max once per boss, on the results screen, never mid-run.</li>
+      <li>No countdown timer on the revive choice: no pressure tactics.</li>
+    </ol>
+  </section>
+</div>
+</body>
+</html>
