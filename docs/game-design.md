@@ -1,0 +1,358 @@
+# Son Durak: Game Design (Systems)
+
+> **Status:** v0.1 · 2026-11-08 · Owns: rules, formulas, progression, economy, telemetry.
+> **Numbers for specific items/enemies/bosses:** [content-catalog.md](content-catalog.md).
+> **Every number here is a STARTING VALUE.** Tune it in playtests. Once implemented,
+> `game/content/**/*.tres` is the source of truth for values; update this doc in design review.
+
+Units: distances in **meters (m)**, time in **seconds (s)**. Reference camera shows
+**12 m width** in portrait (≈ 90 px/m at 1080 px width).
+
+---
+
+## 1. Design Goals and Feel Targets
+
+1. **Readable chaos.** Hundreds of enemies, but the player always knows where they are,
+   what will hurt them, and what they just picked up.
+2. **Power fantasy curve.** Every run starts fragile and ends godlike. The fork-stabbing
+   kid becomes a samovar-wielding storm.
+3. **Short sessions, long arcs.** Runs are 3–8 min; the journey (world map, story, meta)
+   gives a reason to come back.
+4. **Local flavor in mechanics, not just art.** Weapons, enemies and interactables are
+   Istanbul things that behave in fun ways.
+5. **One thumb.** Everything essential works with one thumb; tag-switch and ultimate are
+   optional (auto modes exist).
+
+## 2. Controls and Camera
+
+| Element | Spec |
+|---|---|
+| Orientation | Portrait, reference 1080 × 2340, safe-area aware |
+| Move | Floating joystick spawns at the touch point in the lower 60% of the screen. Radius 1.1 cm physical. Dead-zone 8%. Release = stop. |
+| Attack | Automatic. Weapons target per their behavior (content-catalog.md §2). |
+| Facing | Last non-zero move direction (matters for Fork, Döner Skewer). |
+| Tag-switch | Squad portraits, bottom-left column (mirrored in left-handed mode). Unlocks in L30. |
+| Ultimate | Button bottom-right; glows when charged. "Auto-ult" setting fires it automatically. |
+| Pause | Top-right; always available, including in boss fights. |
+| Camera | Top-down 3/4 view. Follows the player with **look-ahead 1.5 m** in the move direction, smoothing 0.15 s. Route levels clamp to corridor walls. Zooms out to 13.5 m width during hold zones and bosses (0.6 s ease). |
+| Desktop dev controls | WASD/arrows = move, 1–4 = tag, Space = ult, P = pause. (Testing only.) |
+
+## 3. Run Lifecycle
+
+`Level select → (pre-level story) → Run → (boss) → Results → (post-level story) → World map`
+
+- **Run start:** hero spawns with its signature weapon at L1. In-run level resets to 1 every run.
+- **During the run:** kill enemies → XP drops (Adrenaline droplets) → level-up → pick 1 of 3 cards.
+- **Win:** Route levels: reach the exit trigger. Arena levels: survive the timer.
+  Boss levels: defeat the boss.
+- **Lose:** active hero HP hits 0 and no companion can take over → Revive offer
+  (1 per run: rewarded ad stub or 20 Altın) → otherwise Results (partial rewards: 50% Jeton).
+- **First-run safety net:** on the player's very first L1 run, the first death triggers a free
+  "Second Wind" auto-revive (full HP, 2 s invulnerability). Never again after that.
+
+---
+
+## 4. Stats and Formulas
+
+### 4.1 Stats
+| Stat | Meaning | Base (Emre) |
+|---|---|---|
+| `max_hp` | Health | 100 |
+| `armor` | Flat damage reduction per hit | 0 |
+| `move_speed` | m/s | 3.2 |
+| `might` | % bonus to all damage | 0% |
+| `area` | % bonus to weapon **radius / length** (not surface area) | 0% |
+| `cooldown_reduction` | % reduction of weapon cooldowns | 0% |
+| `projectile_bonus` | Extra projectiles for projectile weapons | 0 |
+| `duration` | % bonus to effect durations (zones, orbits, statuses we apply) | 0% |
+| `pickup_radius` | m | 1.5 |
+| `luck` | % bonus to drop chances and card rarity rolls | 0% |
+| `crit_chance` | % | 5% |
+| `crit_damage` | Multiplier on crit | 1.5× |
+| `regen` | HP/s | 0 |
+| `xp_gain` | % bonus XP | 0% |
+
+### 4.2 Modifier stacking (one order, everywhere)
+```
+final = (base + sum(flat)) * (1 + sum(add_pct)) * product(1 + mult_pct)
+```
+- `flat`: e.g., Puffer Jacket +1 armor.
+- `add_pct`: most passives and gear (they add together).
+- `mult_pct`: rare, explicitly labelled "multiplicative" (evolutions, ultimates).
+- Recompute only when a modifier changes (dirty flag), never per frame.
+
+### 4.3 Damage
+```
+outgoing = weapon_damage * (1 + might) * crit * (1 + target_vulnerability) * (1 - target_damage_reduction)
+crit     = crit_damage if rng() < crit_chance else 1
+incoming_to_player = max(1, raw - armor) * (1 - player_damage_reduction)
+```
+- Damage numbers round to integers **for display only**; simulation keeps floats.
+- Contact damage from enemies ticks at most once per **0.5 s per enemy**.
+- Player gets **0.25 s** invulnerability after any hit ≥ 10% max HP (prevents swarm melt spikes).
+
+### 4.4 Caps
+| Stat | Cap |
+|---|---|
+| `cooldown_reduction` | 60% |
+| `move_speed` bonus | +100% |
+| `area` bonus | +200% |
+| `crit_chance` | 100% |
+| `projectile_bonus` | +5 |
+| `player_damage_reduction` | 75% |
+
+### 4.5 XP curve (in-run)
+```
+xp_to_next(level) = round(5 + 5 * level^1.4)
+```
+| Level | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 15 | 20 | 25 | 30 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| XP to next | 10 | 18 | 28 | 40 | 53 | 66 | 81 | 97 | 113 | 131 | 227 | 337 | 458 | 589 |
+
+**Pacing targets:** first level-up at **~15 s**; a level-up every **20–30 s** in early levels;
+**6–8 level-ups in L1**, **20–25 in an 8-minute run** at L20+.
+
+### 4.6 Enemy scaling
+```
+enemy_hp     = base_hp  * (1 + 0.10 * (level_index - 1)) * (1 + 0.08 * minutes_into_run)
+enemy_damage = base_dmg * (1 + 0.05 * (level_index - 1))
+```
+- `level_index` is the global level number (1–300).
+- Elites: ×4 HP, ×1.5 damage, +15% scale (content-catalog.md §5).
+- Bosses use explicit HP per level (content-catalog.md §6), not this formula.
+
+### 4.7 Status effects
+| Effect | Rule | Stacking |
+|---|---|---|
+| **Burn** | 3 dmg/s (scaled by might) for 3 s | Up to 3 stacks (intensity); refresh duration on new stack |
+| **Slow** | −X% move speed | Strongest wins; no stacking |
+| **Stun** | Cannot move/attack for X s | Refresh; bosses immune → take a 0.3 s **Stagger** instead |
+| **Knockback** | Push X m away from the source over 0.15 s | Brutes and bosses resist (content-catalog.md) |
+| **Vulnerable** | Takes +15% damage | Refresh |
+| **Calm** (Lale, later) | −30% move speed within 2.5 m of Lale | Aura, not a stack |
+| **Grabbed** (player) | Fisherman line pulls the player 1.5 m | Wiggle the joystick to cut it short (−50% pull) |
+
+All statuses respect the **duration** stat when applied by the player.
+
+---
+
+## 5. Build System (in-run)
+
+### 5.1 Slots
+- **6 weapon slots** (the signature weapon occupies 1) and **6 passive slots**.
+- Squad shares one build: card weapons fire **from the currently controlled hero**;
+  companions use their own signature weapon only (see §9).
+
+### 5.2 Item levels
+- Weapons: L1–L5. Passives: L1–L5 (except Sesame, max L2, later).
+- Each level's effect is defined per item in content-catalog.md.
+
+### 5.3 Card offering (3 cards per level-up)
+Draw without replacement, using these weights:
+| Candidate | Weight |
+|---|---|
+| Upgrade an owned weapon | 3 |
+| Upgrade an owned passive | 3 |
+| New weapon (if a weapon slot is free) | 2 |
+| New passive (if a passive slot is free) | 2 |
+| Owned weapon at L4 whose paired passive is owned (evolution path) | +2 bonus |
+
+Rules:
+- Never offer maxed items. Never offer locked items (§5.4).
+- If fewer than 3 valid candidates: fill with **Simit** (heal 30 HP) and **Jeton +20** cards.
+- **Luck** adds a chance (luck% × 0.5) to show a **4th card**.
+- The game is paused while the card UI is open.
+
+### 5.4 Progressive pool unlock (onboarding)
+| Unlocks at level | Items added to the card pool |
+|---|---|
+| L1 | Fork (signature), Tea Glass, Sneakers, Ayran, Butter |
+| L2 | Simit, Teapot |
+| L3 | Seagulls, Turkish Coffee |
+| L4 | Döner Skewer, Puffer Jacket |
+| L6 (after beating L5 Kestaneci) | Chestnut Mortar |
+| L11 (after beating L10 Vatman) | Tram Bell |
+| Later chapters | Lahmacun Barrage, Pickle Juice, Pul Biber, Sesame (+ their evolutions) |
+
+**L1 scripted first card:** `[Tea Glass (highlighted), Fork L2, Sneakers]`.
+
+### 5.5 Evolutions
+- Condition: weapon at **L5** + its **paired passive owned** (any level) + open a **Boss Chest**.
+- The evolution replaces the weapon in the same slot; the passive stays.
+- One evolution per chest; if several qualify, the chest picks the oldest-owned weapon.
+- Pairs and effects: content-catalog.md §4.
+
+### 5.6 Rerolls
+- 1 free reroll per run; +1 per rewarded ad (stub), max 3 per run.
+- Banish (remove an item from the run's pool): not in the slice.
+
+### 5.7 Chests
+| Chest | Source | Opens into |
+|---|---|---|
+| **Mini Chest (Kutu)** | Elites (100%) | 1 random upgrade (same weights as §5.3) |
+| **Boss Chest** | Mini-bosses and bosses | Evolution if eligible; otherwise 1–3 upgrades (1: 60%, 2: 30%, 3: 10%; luck shifts toward 3) |
+
+---
+
+## 6. Level Types and District Structure
+
+| Type | Shape | Win condition | Typical length |
+|---|---|---|---|
+| **Route** | Corridor (12–16 m wide, 200–400 m long) with 2–3 **hold zones** where the path is blocked until a timer or objective completes | Reach the exit trigger | 3–6 min |
+| **Arena** | Bounded open area (~30 × 30 m to 40 × 40 m) with props and interactables | Survive the timer | 5–8 min |
+| **Boss** | Route or Arena, ending in a boss arena | Defeat the boss | 6–9 min |
+
+**District template (10 levels):**
+| Level in district | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| Type | Route | Arena | Route | Arena | **Mini-boss** | Route | Arena | Route (night) | Arena (horde modifier) | **Boss** |
+
+**Modifiers** (data-driven, combinable): `night` (reduced light radius 7 m; lit props matter),
+`fog`, `horde` (spawn budget ×1.5, XP ×1.2), `ambush` (spawns from behind allowed), `rain`
+(visual only in the slice).
+
+**Spawn rules (all types):**
+- Enemies spawn in a ring **just outside the camera** (+1.5 m margin), never on screen,
+  except **telegraphed spawns** (crawlers from manholes, 1.0 s telegraph).
+- Route levels: 70% of spawns ahead / sides, 30% behind; behind-spawns only > 7 m from the
+  player, with a 0.5 s audio cue (groan) first.
+- The spawn director uses a **budget per second** curve + scripted events from WaveScript
+  (architecture.md §4.9). Each enemy has a budget cost (content-catalog.md §5).
+- **Max simultaneous enemies: 300** (identical on all quality tiers; gameplay parity).
+
+## 7. Difficulty and Pacing Targets
+
+**Sawtooth curve:** difficulty rises across a district, drops after each boss, rises again.
+
+| Levels | Target first-attempt clear rate |
+|---|---|
+| 1–4 | ≥ 95% |
+| 5 (mini-boss) | ≈ 90% |
+| 6–9 | 85–90% |
+| 10 (boss) | ≈ 70% |
+| 11–19 | 75–90% (sawtooth) |
+| 20 (boss) | ≈ 65% |
+| 21–29 | 70–85% |
+| 30 (Kaan) | ≈ 60% |
+
+Failing should teach: Results screen shows the **cause of death** (enemy type) and one tip.
+A failed level can be replayed immediately with the meta upgrades the player just earned.
+
+---
+
+## 8. Meta Progression (between runs)
+
+### 8.1 Currencies (keep this list short)
+| Currency | Use | Main sources |
+|---|---|---|
+| **Jeton** (old Istanbul transit tokens) | Hero levels, gear upgrades | Level clears, enemy drops |
+| **Hurda** (scrap) | Gear upgrades | Level clears, star chests |
+| **Altın** (Grand Bazaar gold), premium | Revives, (later) store | Star chests (small amounts); IAP later |
+
+Run-only resources (XP) never leave the run.
+
+### 8.2 Hero levels
+- Slice cap: **L15** per hero.
+- Cost: `jeton = round(50 * level^1.5)` → L1→2: 50, L5→6: 559, L10→11: 1,581, L14→15: 2,619.
+- Per level: +4% max HP, +3% might (additive, applied as `add_pct`).
+
+### 8.3 Gear
+| Slot | Main stat | Secondary (rolled at Rare+) |
+|---|---|---|
+| Gloves | Might | Crit chance |
+| Jacket | Max HP | Armor |
+| Shoes | Move speed | Duration |
+| Backpack | Pickup radius | Luck |
+
+- **Rarities:** Common → Uncommon → Rare → Epic (Legendary later). Main stat multiplier
+  1.0 / 1.6 / 2.5 / 4.0. Max upgrade level 10 / 20 / 30 / 40.
+- **Merge:** 3 identical items (same item, same rarity) → 1 of the next rarity, keeping the
+  highest upgrade level.
+- **Upgrade cost per level:** `jeton = 20 * lvl`, `hurda = 2 + lvl`.
+- **Sources:** level first-clear (guaranteed Common item), star chests, boss first-clear
+  (guaranteed Uncommon).
+
+### 8.4 Stars and rewards
+- **Stars per level:** Star 1 = clear · Star 2 = no revive used · Star 3 = end with ≥ 50% HP.
+- **Star chests per district:** at 10 / 20 / 30 stars.
+- **Level clear rewards:** `jeton = 40 + 6 * level`, `hurda = 5 + floor(level / 2)`;
+  **first clear ×2**.
+
+### 8.5 Economy health checks (monitor in telemetry)
+- A player who 1-stars every level should afford roughly one hero level per 2 levels
+  in L1–30. If they can't, the economy is too tight.
+- Gear merges should feel reachable: first Rare item around L15–20 for a non-paying player.
+
+---
+
+## 9. Squad, Tag-Switch and Ultimates
+
+### 9.1 Squad
+- The squad unlocks in **L30** (Kaan). Before that, Emre is solo.
+- **Controlled hero:** moves with the joystick; card weapons fire from them.
+- **Companions:** AI-controlled, follow within 3 m (leash 6 m, teleport back if > 10 m off
+  screen), use their signature weapon and ultimate (auto), and have their own HP.
+- **Companion down:** revive by standing within 1.5 m for 3 s, or auto-revive after 20 s.
+- **Squad wipe:** if the controlled hero goes down and a companion is alive, control switches
+  automatically (1 s slow-mo). If all are down → Revive offer → Results.
+
+### 9.2 Tag-switch
+- Tap a portrait to take control of that hero. **Cooldown 8 s** (shared).
+- **Tag-in move:** 0.5 s invulnerability + a hero-specific burst (content-catalog.md §1).
+- Tag-switching keeps the in-run build; only the "body" changes.
+
+### 9.3 Ultimates
+- Charge: 100 points. Kill +1, elite kill +10, boss hit +0.5 (max 5 per second).
+- Each hero has their own charge meter; companions fire theirs automatically at 100.
+- Ultimates are listed per hero in content-catalog.md §1.
+
+### 9.4 Bonds (later chapters)
+Bond meters and combo ultimates are defined in narrative.md, *Romance & Branching*.
+**Not in the slice;** keep the data model ready (`BondDef` stub) and nothing more (YAGNI).
+
+---
+
+## 10. Telemetry Events (slice)
+
+Written as JSONL locally (architecture.md §4.16). Every event has: `ts`, `install_id`,
+`session_id`, `build`, `quality_tier`, `device_model`, `event`, `level`, `seed`.
+
+| Event | Extra fields |
+|---|---|
+| `session_start` / `session_end` | `duration_s` |
+| `level_start` | `level_type`, `hero_ids`, `hero_levels`, `gear_power` |
+| `segment_reached` | `segment_id`, `t_s` (Route levels) |
+| `level_up` | `run_level`, `t_s` |
+| `card_offered` / `card_chosen` | `cards[]`, `chosen`, `rerolled` |
+| `evolution` | `weapon_id`, `t_s` |
+| `boss_phase` | `boss_id`, `phase`, `t_s`, `player_hp_pct` |
+| `player_hit` (sampled 10%) | `source_id`, `damage`, `hp_after` |
+| `death` | `cause_id`, `t_s`, `run_level`, `build[]` |
+| `revive_offer` / `revive_used` | `method` |
+| `level_end` | `result` (win/lose/quit), `t_s`, `stars`, `kills`, `rewards` |
+| `cinematic` | `id`, `action` (complete/skip), `t_s` |
+| `tutorial_step` | `step_id`, `t_s` |
+| `meta_upgrade` | `type` (hero/gear/merge), `id`, `cost` |
+| `ad_stub` | `placement`, `result` |
+| `perf_sample` (every 10 s) | `fps_avg`, `frame_p95_ms`, `enemies_alive`, `mem_mb` |
+
+## 11. Balance Tooling: Headless Bot Simulator
+
+- Runs a level headless with a fixed seed and a **bot input strategy**:
+  `kite_circle` (moves in wide circles), `greedy_xp` (moves toward the nearest XP),
+  `random_walk` (baseline noob).
+- Card choice strategies: `random`, `greedy_damage`, `evo_seeker`.
+- Command runs N seeds × strategies per level and writes `reports/balance/<level>.csv`:
+  clear rate, median clear time, time to first level-up, level-ups, deaths by cause, peak enemies.
+- **Use it before every review packet** for any level that changed. Target bands: §7.
+
+## 12. Future Systems (documented, not built)
+
+| System | Chapter | Note |
+|---|---|---|
+| Battery charge (scooters) | 2 | In-run resource; drains while riding; pickups refill |
+| Vehicle levels & garage | 2–3 | Vehicle as a "hero" with its own stats and upgrade tree |
+| Fuel | 3 | Like battery, for the car |
+| Human enemies with cover/flanking | 2+ | New AI behaviors on top of the swarm system |
+| Bonds & combo ultimates | 2+ | See §9.4 |
+| Day/night cycle within a level | 2+ | The slice has the `night` modifier only |

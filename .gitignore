@@ -3,3 +3,25 @@ node_modules/
 venv/
 .venv/
 .env
+
+# Godot 4 (keep *.import files; they hold import settings)
+game/.godot/
+*.translation
+
+# Builds and signing (never commit)
+builds/
+*.apk
+*.aab
+*.ipa
+*.keystore
+*.jks
+export_credentials.cfg
+
+# Generated reports (summaries are committed)
+reports/**
+!reports/**/
+!reports/**/SUMMARY.md
+
+# Review videos are shared separately (screenshots are committed)
+reviews/media/**/*.mp4
+reviews/media/**/*.mov

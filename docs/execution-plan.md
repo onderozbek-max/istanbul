@@ -1,0 +1,251 @@
+# Son Durak: Execution Plan (Vertical Slice)
+
+> **Status:** v0.1 · 2026-11-08 · Owns: who does what, milestones, review protocol, prompt kit.
+> **What to build:** [prd.md](prd.md). **How it's structured:** [architecture.md](architecture.md).
+
+---
+
+## 1. Operating Model
+
+| Role | Who | Responsibilities |
+|---|---|---|
+| **Owner / decider** | Onder | Priorities, final calls on open decisions, plays every milestone build on a phone, recruits playtesters |
+| **Lead / reviewer** | Opus | Owns the docs; reviews every milestone packet; issues revision instructions; makes architecture calls; updates docs between iterations |
+| **Executor** | Coding model in an agentic harness | Implements milestones per the docs; writes tests; produces review packets; never changes design intent silently |
+
+**Loop:** Executor builds a milestone → writes a review packet → Onder plays the build →
+Lead reviews the packet + repo → feedback file → Executor revises → Lead approves → next milestone.
+
+**Important reviewer limitation:** the lead can read code, run headless tests and the bot
+simulator, and **view images**, but **cannot watch video or play the game**. Packets must
+therefore include **screenshots at specified moments**, test/bot output and telemetry files.
+Videos are for Onder.
+
+## 2. Executor Requirements (model-agnostic)
+
+Pick the executor by these criteria, not by brand:
+1. **Agentic reliability:** edits files, runs shell commands, reads errors, fixes them in a loop without hand-holding.
+2. **Godot 4 GDScript correctness:** zero Godot 3 APIs (architecture.md §8).
+3. **Long-context discipline:** reads AGENTS.md + docs and follows them; updates docs when it deviates.
+4. **Test-first habits:** writes and runs tests unprompted.
+5. **Cost/speed:** a full milestone in days, not weeks.
+
+### Bake-off (recommended, about half a day)
+Give each candidate the **same kickoff prompt** (§6.1) on separate branches
+(`bakeoff/<model>`), limited to **M0-T1 → M0-T3**. The lead scores both:
+
+| Criterion | Weight | How it's measured |
+|---|---|---|
+| Godot 4 correctness | 25% | Godot 3 API count in the diff (target 0); project opens and runs headless |
+| Benchmark result | 25% | Sim ms/tick with 500 enemies (headless) |
+| Architecture adherence | 20% | SoA swarm, folder layout, dependency rules |
+| Tests | 15% | Tests exist, pass, and are meaningful |
+| Autonomy | 15% | Number of human nudges needed |
+
+The winner becomes the executor. The loser's branch is deleted (no merging two styles).
+
+## 3. Working Agreements (also in AGENTS.md)
+
+- **Docs are the source of truth for intent;** `game/content/**/*.tres` is the source of truth for numbers once implemented.
+- **Branch per task:** `m<N>/t<K>-<slug>`; small commits; message format `m1/t5: add lob_aoe behavior`.
+- **Tests green before merging to `main`.** Never commit with failing tests.
+- **Files ≤ 600 lines** (prefer ≤ 300). Static typing everywhere.
+- **Tuning changes** (numbers) go in the packet's *Deviations* section. **Design or architecture changes** need a product.md decision-log entry, flagged as "proposed" until the lead approves.
+- **Stop and ask** (write the question into the packet or `reviews/QUESTIONS.md`) before:
+  adding a plugin/dependency, changing an architecture rule, adding content outside the slice,
+  touching anything in the narrative guardrails, or spending money (assets, services).
+- **No secrets** (keys, tokens, signing files) in the repo.
+
+## 4. Milestones
+
+Each task has acceptance criteria (AC). A milestone ends with a **review gate** (§5).
+Durations assume one executor working steadily; compress if velocity allows.
+
+### M0: Foundation and Engine Gate (week 1)
+| Task | Description | AC |
+|---|---|---|
+| T1 | Create the Godot 4 project in `game/`, pin the version in AGENTS.md, folder skeleton (architecture.md §3), the 3 autoload stubs, Godot `.gitignore` entries | Project opens; headless run exits 0 |
+| T2 | Install GUT; add `tools/test.sh`; one real unit test (XP table from game-design.md §4.5) | `tools/test.sh` passes |
+| T3 | Benchmark scene: SoA swarm (500 walkers, separation, spatial hash), projectile pool (200), XP droplets (300), MultiMesh rendering, perf overlay, JSON results file | Headless sim benchmark prints ms/tick; scene runs on desktop |
+| T4 | Android debug export; run the benchmark on the Low reference device | Results JSON from the device |
+| T5 | Packet `reviews/REVIEW-M0.md` with numbers + recommendation for D-004 | Lead decides the engine |
+
+### M1: First Playable, Gray Box (weeks 2–3) — **"Is it fun?" checkpoint**
+| Task | Description | AC |
+|---|---|---|
+| T1 | `core/`: stats + modifiers + damage + caps + XP curve + card weighting, with unit tests | Values match game-design.md §4–5 tables |
+| T2 | InputRouter, floating joystick, desktop controls | US-2.1 AC |
+| T3 | Emre placeholder (capsule + ring), camera with look-ahead | Camera spec (game-design.md §2) |
+| T4 | Swarm promoted to `sim/`: walker + runner Defs, contact damage, deaths, XP droplets, pickup radius | 300 enemies at 60 fps on desktop |
+| T5 | Weapon framework + Fork + Tea Glass; level-up card UI (placeholder) | US-3.1 AC |
+| T6 | Arena test level (30 × 30 m), simple budget spawner, run timer, death → results stub | A complete run loop |
+| T7 | Telemetry JSONL sink with core events | JSONL written and exportable |
+
+### M2: Systems Complete (weeks 4–5)
+| Task | Description | AC |
+|---|---|---|
+| T1 | All Resource Defs + content validator; all slice content entered as `.tres` from content-catalog.md | Validator passes; zero magic numbers in `sim/` |
+| T2 | All slice weapon behaviors, passives, evolutions, status effects | Debug arena shows every item at L1 and L5, plus 4 evolutions |
+| T3 | Spawn director: WaveScript, markers, patterns, modifiers, caps | US-4.3 AC |
+| T4 | Enemy behaviors: crawler, brute, spitter, exploder, tourist, fisherman, elite variant | Distinct behaviors per content-catalog.md §5 |
+| T5 | Boss FSM + AttackDef telegraphs; Kestaneci implemented | Telegraph rules (design-system.md §6) |
+| T6 | RNG streams + InputRecorder + golden test | Same seed + inputs → identical result |
+| T7 | Headless bot simulator + CSV reports | game-design.md §11 |
+| T8 | Architecture tests (dependency rules, quality independence) | Tests fail on a deliberate violation |
+
+### M3: Level 1 Complete in Gray Box (weeks 6–7)
+| Task | Description | AC |
+|---|---|---|
+| T1 | Route level type: corridor, segments, hold zones, exit trigger | US-5.1 AC |
+| T2 | Level 1 per level-001-istiklal.md (layout, markers, WaveScript, interactables) | level-001 §13, items 4, 5, 7 |
+| T3 | In-engine cinematic sequencer with interactive beats; cold open blocked out | level-001 §4; US-1.2 AC |
+| T4 | Tutorial steps, phone-call widget, barks, localization pipeline (TR/EN) | level-001 §5, §9 |
+| T5 | Results screen (stars, rewards), save system v1 | US-7.3, US-11.1 AC |
+
+### M4: Look and Feel (weeks 8–11)
+| Task | Description | AC |
+|---|---|---|
+| T1 | **Style frames (6–10)**: Onder + lead approve. **Blocking** for all other art | Approved frames committed in `art/style-frames/` |
+| T2 | Style model + asset pipeline + `art/PROVENANCE.csv` | design-system.md §12 |
+| T3 | Emre's full animation set; walker/runner/crawler; Level 1 environment kit and props | level-001 §14 |
+| T4 | UI kit: HUD, cards, results, call widget, settings | design-system.md §13 |
+| T5 | Game-feel spec, VFX, music layers, SFX, temp VO | design-system.md §7, §14, §15 |
+| T6 | Quality tiers, device detection, HD-asset delivery stub; perf pass on the Low device | US-9.1, US-9.2 AC |
+| T7 | Accessibility settings | design-system.md §11 checklist |
+
+### Demand Test Gate (owner-run, weeks 10–12, parallel to the end of M4)
+Onder runs the demand test (product.md §14, Phase 3) using approved key art and Level 1
+beauty footage. **M5 starts only if the demand signal is good.** The executor's job here is
+limited to capturing clean footage and screenshots from the M4 build.
+
+### M5: District 1 (weeks 12–14)
+| Task | Description | AC |
+|---|---|---|
+| T1 | Levels 2–10 (data + maps via the district template); Vatman boss; Kestaneci polish | content-catalog.md §6–7 |
+| T2 | Meta: hero levels, 4 gear slots + merge, currencies, star chests | game-design.md §8 |
+| T3 | World map with route, nodes, km progress | US-7.1 AC |
+| T4 | Motion-comic player; L10 comic; dizi triple zoom | US-6.1 AC |
+| T5 | Bot balance pass for L1–10 | Within game-design.md §7 bands |
+
+### M6: Districts 2–3 and Kaan (weeks 15–18)
+| Task | Description | AC |
+|---|---|---|
+| T1 | Levels 11–30; Tour Guide, The Bride (halay line), Big Fisherman, Kaan story fight | content-catalog.md §6–7 |
+| T2 | Squad, tag-switch, companion AI, ultimates | game-design.md §9 |
+| T3 | Paşa early-warning behavior; L20 and L30 motion comics | narrative.md, content-catalog.md |
+| T4 | Bot balance pass for L11–30 | Within §7 bands |
+
+### M7: Slice Polish and Playtest (weeks 19–20)
+| Task | Description | AC |
+|---|---|---|
+| T1 | Bug bash, performance, crash-free target, ads stubs, settings complete | prd.md §6 |
+| T2 | Internal test builds (Play internal testing, TestFlight) | Installable by testers |
+| T3 | Playtest: 10–20 external testers; telemetry + short survey | Data collected |
+| T4 | Final packet with PRD §7 metrics | Go/no-go for soft-launch prep |
+
+## 5. Review Protocol
+
+### 5.1 Files
+```
+reviews/
+  REVIEW-M<N>.md          packet written by the executor
+  FEEDBACK-M<N>.md        written by the lead
+  QUESTIONS.md            open questions for the lead or owner (running list)
+  media/M<N>/             screenshots (PNG). Videos (.mp4) are gitignored; share them separately with Onder
+```
+
+### 5.2 Packet template (`REVIEW-M<N>.md`)
+```markdown
+# Review Packet M<N>: <title>
+## Summary            (5 bullets max: what was built)
+## Commits            (`git log --oneline <from>..<to>`)
+## Acceptance criteria (table: task / AC / status / evidence path)
+## Tests              (command + pass/fail summary)
+## Performance        (device, tier, p50/p95 frame ms, sim ms/tick, memory, peak enemies)
+## Balance            (bot sim summary per changed level vs target bands)
+## Telemetry          (JSONL paths + key numbers)
+## Screenshots        (path + what it shows; required list per milestone below)
+## Deviations         (number/design changes: what, why, doc updated?)
+## Known issues
+## Questions for the lead
+## Proposed next steps
+```
+**Required screenshots** (minimum): M1: peak-density arena + card UI · M2: each evolution
+active + each boss telegraph · M3: each Level 1 segment + hold-zone peak · M4: same moments as
+M3 in final art, side by side with the style frames, on Low and High tiers · M5–M6: every
+boss phase + world map + one motion-comic panel per comic.
+
+### 5.3 Feedback format (`FEEDBACK-M<N>.md`)
+- **Verdict:** `APPROVED` | `APPROVED WITH CHANGES` | `REVISE`.
+- Items by severity: **BLOCKER** (must fix before merge), **MAJOR** (fix in this milestone),
+  **MINOR** (fix when touching the area), **NIT** (optional).
+- Each item: ID, file/line or doc section, problem, required action, AC to verify.
+- The executor appends a **Resolution** section (item ID → commit) and requests re-review.
+
+### 5.4 What the lead always checks
+Doc adherence · Godot 3 API leaks · dependency rules · magic numbers in `sim/` · test quality ·
+performance numbers · readability in screenshots · telemetry completeness · file sizes ·
+guardrails (narrative.md, *Writer Guardrails*) · decision-log hygiene.
+
+## 6. Prompt Kit
+
+### 6.1 Kickoff prompt (executor)
+```
+You are the executor for "Son Durak", a mobile survivor-like set in Istanbul.
+Read AGENTS.md first, then the docs in the order it lists. The docs are the source of truth.
+Your job right now: milestone M<N> from docs/execution-plan.md §4, tasks T<a>–T<b>.
+Rules: follow docs/architecture.md exactly (Godot 4 only, static typing, SoA swarm,
+data-driven content, dependency rules). Write tests. Keep files under 600 lines.
+Do not change design intent; log number changes under "Deviations" in the review packet.
+Stop and write a question into reviews/QUESTIONS.md if you hit any "stop and ask" case.
+When done, write reviews/REVIEW-M<N>.md using the template in execution-plan.md §5.2,
+including the required screenshots. Then stop.
+```
+
+### 6.2 Revision prompt (executor)
+```
+Read reviews/FEEDBACK-M<N>.md. Fix every BLOCKER and MAJOR item, and MINOR items in files you
+touch. For each item, reference the fixing commit in a "Resolution" section appended to
+reviews/REVIEW-M<N>.md. Re-run tests, the bot simulator for changed levels, and refresh the
+affected screenshots. Then stop.
+```
+
+### 6.3 Review prompt (lead, back with Opus)
+```
+Review milestone M<N> of Son Durak. Read reviews/REVIEW-M<N>.md, inspect the diff
+(<from>..<to>), run tools/test.sh and the bot simulator where relevant, view the screenshots,
+and write reviews/FEEDBACK-M<N>.md per execution-plan.md §5.3. Update docs if decisions changed.
+```
+
+## 7. Definition of Done (any task)
+
+1. Meets its AC, with evidence in the packet.
+2. Tests added/updated and green; architecture and content tests green.
+3. No Godot 3 APIs, no magic numbers in `sim/`, files ≤ 600 lines, static types.
+4. Strings localized (TR/EN keys), no baked text in images.
+5. Telemetry events added where the schema requires them.
+6. Docs updated if behavior or intent changed.
+
+## 8. Timeline Summary
+
+| Week | Milestone | Owner moment |
+|---|---|---|
+| 1 | M0 | Engine decision |
+| 2–3 | M1 | **Onder plays the first playable** |
+| 4–5 | M2 | Systems demo review |
+| 6–7 | M3 | Level 1 gray box; first internal telemetry |
+| 8–11 | M4 | Approve style frames (week 8); Level 1 beauty build |
+| 10–12 | Demand test | **Go/no-go for district production** |
+| 12–14 | M5 | District 1 + meta |
+| 15–18 | M6 | Districts 2–3 + squad |
+| 19–20 | M7 | External playtest → go/no-go for soft-launch prep |
+
+## 9. Execution Risks
+
+| Risk | Early signal | Response |
+|---|---|---|
+| Executor drifts from the docs | Packet deviations pile up, or none listed while the diff shows changes | Lead issues REVISE; tighten the kickoff prompt |
+| Gold-plating | Features outside the PRD appear | Revert; the PRD non-goals are binding |
+| Art bottleneck | M4-T1 slips past week 9 | Simplify the style (flatter shading); reduce the outfit count |
+| Perf regressions | p95 rises between packets | Perf numbers required in every packet; bisect |
+| Fun gap | M1 testers stop before 5 minutes | Iterate M1 (feel, pacing, XP) before M2; do not proceed on "fine" |

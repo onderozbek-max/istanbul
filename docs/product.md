@@ -147,8 +147,8 @@ premium version; budget phones get a lighter one. **Gameplay is identical on eve
 
 ## 9. Art, Animation & Audio Direction
 
-- **Style:** stylized, readable top-down (stylized 3D or hand-painted 2D). Pick whichever
-  hides AI-generation flaws best. Locked in the prototype phase.
+- **Style:** 2D, top-down 3/4, hand-painted environments + ink-outlined characters (D-007).
+  Details: design-system.md. Final direction picked from style frames (execution-plan.md M4).
 - **Story presentation:** **motion comics** (animated comic panels) instead of 3D cutscenes.
   Cheap, AI-art-friendly, stylish, and they read like a dizi.
 - **Signature move:** the dizi cliffhanger (freeze frame, triple zoom across faces, strings).
@@ -222,15 +222,16 @@ premium version; budget phones get a lighter one. **Gameplay is identical on eve
 
 | Phase | Duration | Exit criteria |
 |---|---|---|
-| **0. Engine stress test** | Week 1 | 500 enemies at 30 fps on a low-end Android (D-004) |
-| **1. Core prototype** | Weeks 2–4 | Fork-stab İstiklal run is fun for 10 testers |
-| **2. Demand test** | Weeks 5–6 | Fake trailer / TikTok tests (~$100–300) show strong CTR, or stop |
-| **3. Vertical slice** | Months 2–4 | Levels 1–30 (3 districts), Kaan, motion comics, analytics, ads |
-| **4. Soft launch (TR)** | Months 4–6 | Hit the §12 retention targets; tune the economy |
-| **5. Chapter 1 complete** | Months 6–9 | All 100 levels + Night Shift endgame; global launch |
-| **6. Chapter 2** | Built in parallel from month 7 | Ready **before** the §6 gate can fire |
+| **0. Engine stress test** | Week 1 (M0) | 500 enemies at 30 fps on a low-end Android (D-004) |
+| **1. Core prototype** | Weeks 2–3 (M1) | Gray-box run is fun for Onder + 5 testers |
+| **2. Systems + Level 1** | Weeks 4–11 (M2–M4) | Level 1 fully beautiful and playable |
+| **3. Demand test** | Weeks 10–12, parallel to M4's end | Key art + Level 1 footage TikTok/ads tests (~$100–300) show strong CTR, or stop before district production |
+| **4. Vertical slice** | Weeks 12–20 (M5–M7) | Levels 1–30, Kaan, motion comics, external playtest |
+| **5. Soft launch (TR)** | Months 5–7 | Hit the §12 retention targets; tune the economy |
+| **6. Chapter 1 complete** | Months 7–10 | All 100 levels + Night Shift endgame; global launch |
+| **7. Chapter 2** | Built in parallel from month 8 | Ready **before** the §6 gate can fire |
 
-**Publisher option:** after Phase 2 or 4, pitch Istanbul publishers (Rollic, Supersonic, etc.)
+**Publisher option:** after Phase 3 or 5, pitch Istanbul publishers (Rollic, Supersonic, etc.)
 to fund user acquisition. Their tests can replace your marketing budget.
 
 ## 15. Compliance & Sensitivity
@@ -258,11 +259,16 @@ no gacha, no custom backend, no more than 3 quality tiers. Each one needs data t
 | D-004 | 2026-11-08 | Engine: Godot 4 if the stress test passes, else Unity 6 | AI-friendliness vs. ad-SDK maturity and enemy-count performance | Open |
 | D-005 | 2026-11-08 | Story via motion comics + Turkish VO for key scenes | Dizi feel at solo-builder cost | Adopted |
 | D-006 | 2026-11-08 | Branch-and-bottleneck narrative; triangle targets the highest-bond girl | Meaningful choice at affordable scope | Adopted |
+| D-007 | 2026-11-08 | 2D, top-down 3/4 view, **portrait** orientation; skeletal heroes, flipbook enemies | One-thumb play; cheapest path to premium hero animation; best low-end performance | Adopted |
+| D-008 | 2026-11-08 | Content data as Godot custom Resources (`.tres`) in per-city packs | Typed, text-based (AI-editable), editor-friendly; city-as-data | Adopted |
+| D-009 | 2026-11-08 | Two level types: Route (corridor + hold zones) and Arena (survive the timer) | Route sells the "walk home" journey; Arena keeps the genre core | Adopted |
+| D-010 | 2026-11-08 | Enemies/projectiles as a data-oriented swarm (SoA + spatial hash + MultiMesh), no node per enemy | Only realistic path to 300+ enemies on budget Androids | Adopted |
+| D-011 | 2026-11-08 | Operating model: Opus = lead/reviewer, separate executor model, milestone review gates | Speed of execution plus a consistent design authority | Adopted |
 
 ## 18. Open Questions
 
 1. Final engine choice (D-004): depends on the week-1 stress test.
 2. Exact gate threshold: is 5% right once real funnel data exists?
-3. Stylized 3D vs. hand-painted 2D: decide after style tests in Phase 1.
+3. Hand-painted 2D style direction (D-007 settles 2D): pick from style frames in M4.
 4. Self-publish vs. publisher deal: decide after the demand test.
 5. Name: is *Son Durak* clear and searchable enough on stores worldwide?
