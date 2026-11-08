@@ -30,20 +30,11 @@ Pick the executor by these criteria, not by brand:
 4. **Test-first habits:** writes and runs tests unprompted.
 5. **Cost/speed:** a full milestone in days, not weeks.
 
-### Bake-off (confirmed by Onder, about half a day)
-**Candidates:** Claude Sonnet 5.5 and GPT Sol 6.1.
-Give each candidate the **same kickoff prompt** (§6.1) on separate branches
-(`bakeoff/<model>`), limited to **M0-T1 → M0-T3**. The lead scores both:
-
-| Criterion | Weight | How it's measured |
-|---|---|---|
-| Godot 4 correctness | 25% | Godot 3 API count in the diff (target 0); project opens and runs headless |
-| Benchmark result | 25% | Sim ms/tick with 500 enemies (headless) |
-| Architecture adherence | 20% | SoA swarm, folder layout, dependency rules |
-| Tests | 15% | Tests exist, pass, and are meaningful |
-| Autonomy | 15% | Number of human nudges needed |
-
-The winner becomes the executor. The loser's branch is deleted (no merging two styles).
+### Selection (D-015, revised 2026-11-08)
+**Onder picks the executor model directly** (no bake-off). The five criteria above become the
+lead's checklist in every review. If the executor fails them repeatedly (for example, keeps
+writing Godot 3 APIs or ignoring the architecture), swap the model: all context lives in the
+repo, so switching costs one kickoff prompt.
 
 ## 3. Working Agreements (also in AGENTS.md)
 

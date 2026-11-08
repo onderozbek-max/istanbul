@@ -288,7 +288,7 @@ no gacha, no custom backend, no more than 3 quality tiers. Each one needs data t
 | D-012 | 2026-11-08 | Game title: recommended *No Signal: Istanbul* (see §1.1); code name *Project Istanbul* | Story-native, global, franchises as `<Title>: <City>` | **Proposed** (needs trademark/store checks + Onder's pick) |
 | D-013 | 2026-11-08 | Main character names: Arda, Kaan, Mila, Ada (+ Selim, Leyla, Hasan Dede) | Real Turkish names that are easy to read and say worldwide (narrative.md) | Adopted |
 | D-014 | 2026-11-08 | iOS first; Android port before any big Turkish growth push | Owner hardware and accounts, higher spend per player; Turkey is Android-heavy | Adopted |
-| D-015 | 2026-11-08 | Executor chosen by bake-off (execution-plan.md §2) | Pick by evidence, not by brand | Adopted |
+| D-015 | 2026-11-08 | Onder picks the executor model directly (bake-off dropped); the lead checks execution-plan.md §2 criteria in every review | Owner's call; swapping models is cheap because context lives in the repo | Adopted (revised) |
 | D-016 | 2026-11-08 | Monetization designed into game systems: deterministic purchases, Monthly Card, Road Pass, Bazaar, rewarded ads only (business-plan.md) | Fair PvE monetization that funds the game without hurting retention or trust | Adopted |
 
 ## 18. Open Questions

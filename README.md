@@ -8,7 +8,7 @@ It plays like Survivor.io but feels like a Turkish dizi: a squad you care about,
 home across real neighborhoods, and cliffhangers that bring players back.
 
 > **Status (2026-11-08):** design foundation + business plan complete. No game code yet.
-> **Next:** milestone **M0** as a model bake-off (project setup + engine stress test). See [Kickoff](#kickoff-next-steps).
+> **Next:** milestone **M0** (project setup + engine stress test). See [Kickoff](#kickoff-next-steps).
 > **Repo:** https://github.com/onderozbek-max/istanbul
 
 ---
@@ -45,7 +45,7 @@ docs/
   design-system.md         look and feel: art, colors, type, HUD, readability, juice, a11y
   architecture.md          code structure, patterns, dependency rules, testing, Godot pitfalls
   level-001-istiklal.md    the opening level in full detail
-  execution-plan.md        milestones M0-M8, bake-off, review protocol, prompt kit
+  execution-plan.md        milestones M0-M8, review protocol, prompt kit
 reviews/                   review packets (executor) + feedback (lead) + QUESTIONS.md
 game/                      Godot project (created in M0)
 art/                       source art + PROVENANCE.csv (created in M4)
@@ -109,8 +109,7 @@ M8 soft-launch prep: monetization + live ops (wk 21–26).
 
 ## Kickoff: Next Steps
 
-**Already decided (2026-11-08):** adapted chapter gate (D-002) · executor bake-off between
-Claude Sonnet 5.5 and GPT Sol 6.1 (D-015) · iOS first (D-014) · names Arda/Kaan/Mila/Ada (D-013).
+**Already decided (2026-11-08):** adapted chapter gate (D-002) · Onder picks the executor model (D-015) · iOS first (D-014) · names Arda/Kaan/Mila/Ada (D-013).
 **Still open:** final title (D-012, run the checks in product.md §1.1) · buy the low reference iPhone.
 
 ### Step 1: Employer policy check (15 min)
@@ -136,38 +135,25 @@ access token or collaborator access then.
       **Required for M0-T4.**
 - [ ] Your agentic coding tool, pointed at the repo, allowed to edit files and run shell commands
 
-### Step 4: Run the bake-off (half a day)
-Use two git worktrees so both models work in parallel without stepping on each other:
-```bash
-git worktree add ../istanbul-sonnet -b bakeoff/sonnet-5-5
-git worktree add ../istanbul-gpt    -b bakeoff/gpt-sol-6-1
-```
-Open each folder in its own agent session (one per model) and paste:
+### Step 4: Kick off M0 (paste into your executor)
 ```
 You are the executor for "Project Istanbul" (code name; game title in docs/product.md §1.1),
 a mobile survivor-like set in Istanbul, iOS first.
 Read AGENTS.md first, then the docs in the order it lists. The docs are the source of truth.
-This is a BAKE-OFF: do milestone M0 tasks T1-T3 only (docs/execution-plan.md §4).
+Your job right now: milestone M0 from docs/execution-plan.md §4, tasks T1-T5.
 Rules: follow docs/architecture.md exactly (Godot 4 only, static typing, SoA swarm,
 data-driven content, dependency rules). Write tests. Keep files under 600 lines.
-Work autonomously; do not ask me questions unless truly blocked.
-When done, write reviews/REVIEW-M0-bakeoff.md using the template in execution-plan.md §5.2
-(include the headless benchmark numbers and how many times you needed human help), commit,
-push your branch, and stop.
+Do not change design intent; log number changes under "Deviations" in the review packet.
+Stop and write a question into reviews/QUESTIONS.md if you hit any "stop and ask" case.
+For T4, guide me through the iOS export (Godot -> Xcode -> device) and run the benchmark on
+the low reference iPhone and on the iPhone 15 Pro Max / 16 Pro.
+When done, write reviews/REVIEW-M0.md using the template in execution-plan.md §5.2,
+including the required screenshots and a recommendation for D-004. Commit, push, and stop.
 ```
-Then push both branches (`git push -u origin bakeoff/sonnet-5-5` and `bakeoff/gpt-sol-6-1`)
-and bring them to the lead for scoring (execution-plan.md §2).
 
-### Step 5: Winner finishes M0
-On the winning branch, paste:
-```
-Continue M0: tasks T4-T5 from docs/execution-plan.md §4. Help me export to iOS (Godot -> Xcode
--> device) and run the benchmark on the low reference iPhone and on the iPhone 15 Pro Max /
-16 Pro. Record the results JSON from each device, then write reviews/REVIEW-M0.md per
-execution-plan.md §5.2 with a recommendation for D-004. Then stop.
-```
-You do the physical part (plug in phones, trust the developer certificate, press Run in Xcode).
-Merge the winner into `main`; delete the losing branch and worktree.
+### Step 5: Your part of T4
+Plug in each iPhone, trust the developer certificate, and press Run in Xcode when the
+executor asks. Keep the results JSON files it records.
 
 ### Step 6: Bring it back for review
 Give the lead (Opus) repo access (or paste the packet + screenshots + `git log`) with:
