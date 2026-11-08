@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>17 Motion comic | Project Istanbul lo-fi</title>
+<link rel="stylesheet" href="lofi.css"><script src="lofi.js" defer></script>
+</head>
+<body>
+<nav class="pager" id="pager" aria-label="Screens"></nav>
+<div class="page">
+  <main class="phone" aria-label="Phone: motion comic scene after level 10">
+    <div class="screen dark">
+      <div class="row between"><span class="cap">After Level 10</span><span class="chip" style="background:#4A4A4A;color:#fff">AUTO</span></div>
+      <div class="comic fill" style="grid-template-rows:1.3fr 1fr">
+        <div class="ph" style="position:relative">PANEL 1 (wide)<br>The derailed red tram on its side,<br>smoke, Tünel square at night<br>[slow pan right, 3 parallax layers]
+          <span style="position:absolute;right:14px;top:14px;font-size:28px;font-weight:900;color:var(--danger);transform:rotate(-8deg)">GUMM!</span>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+          <div class="ph">PANEL 2<br>Arda close-up,<br>fork in hand,<br>breathing hard</div>
+          <div class="ph">PANEL 3<br>The steep street<br>down to Karaköy,<br>the bridge beyond</div>
+        </div>
+      </div>
+      <div class="bubble" style="color:var(--ink)">Tamam... yokuş aşağı. Karaköy.</div>
+      <div class="panel cap" style="color:#fff">Subtitle (EN): "Okay... downhill. Karaköy."</div>
+      <div class="row between">
+        <span class="cap">Tap to continue</span>
+        <span class="btn ghost" style="border-color:#fff;color:#fff">Hold to skip</span>
+      </div>
+    </div>
+  </main>
+  <section class="notes">
+    <h1>17 Motion comic</h1>
+    <p class="ref">Specs: design-system.md 9.1, 9.2 · narrative.md Chapter 1 · prd.md US-6.1</p>
+    <ol>
+      <li>1-4 panels per screen in portrait; each panel gets a Ken Burns pan/zoom with 3-5 parallax layers.</li>
+      <li>Speech bubbles hold max 90 characters; comic SFX lettering ("GUMM!") is part of the art layer.</li>
+      <li>Turkish VO with subtitles (TR/EN), tap to advance, auto mode, <b>hold 0.6 s to skip</b> (after the first view).</li>
+      <li>Scenes stay ≤ 45 s. Skip rate is tracked (target &lt; 50%).</li>
+      <li>The dizi triple-zoom cliffhanger is reserved for L10/L20/L30/L100 endings, so it stays special.</li>
+    </ol>
+  </section>
+</div>
+</body>
+</html>

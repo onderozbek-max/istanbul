@@ -89,7 +89,7 @@ Durations assume one executor working steadily; compress if velocity allows.
 | Task | Description | AC |
 |---|---|---|
 | T1 | Route level type: corridor, segments, hold zones, exit trigger | US-5.1 AC |
-| T2 | Level 1 per level-001-istiklal.md (layout, markers, WaveScript, interactables) | level-001 §13, items 4, 5, 7 |
+| T2 | Level 1 per level-001-istiklal.md (layout, markers, WaveScript, interactables); map in `design/lofi/level-001-map.svg` | level-001 §13, items 4, 5, 7 |
 | T3 | In-engine cinematic sequencer with interactive beats; cold open blocked out | level-001 §4; US-1.2 AC |
 | T4 | Tutorial steps, phone-call widget, barks, localization pipeline (TR/EN) | level-001 §5, §9 |
 | T5 | Results screen (stars, rewards), save system v1 | US-7.3, US-11.1 AC |
@@ -97,7 +97,7 @@ Durations assume one executor working steadily; compress if velocity allows.
 ### M4: Look and Feel (weeks 8–11)
 | Task | Description | AC |
 |---|---|---|
-| T1 | **Style frames (6–10)**: Onder + lead approve. **Blocking** for all other art | Approved frames committed in `art/style-frames/` |
+| T1 | **Style frames (6–10)** per `design/style-exploration.md` (can start any time before M4): Onder + lead approve. **Blocking** for all other art | Approved frames committed in `art/style-frames/` |
 | T2 | Style model + asset pipeline + `art/PROVENANCE.csv` | design-system.md §12 |
 | T3 | Arda's full animation set; walker/runner/crawler; Level 1 environment kit and props | level-001 §14 |
 | T4 | UI kit: HUD, cards, results, call widget, settings | design-system.md §13 |

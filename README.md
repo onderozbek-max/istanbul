@@ -46,6 +46,7 @@ docs/
   architecture.md          code structure, patterns, dependency rules, testing, Godot pitfalls
   level-001-istiklal.md    the opening level in full detail
   execution-plan.md        milestones M0-M8, review protocol, prompt kit
+design/                    low-fi wireframes (open design/lofi/index.html), Level 1 map, style brief
 reviews/                   review packets (executor) + feedback (lead) + QUESTIONS.md
 game/                      Godot project (created in M0)
 art/                       source art + PROVENANCE.csv (created in M4)

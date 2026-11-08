@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>16 Settings | Project Istanbul lo-fi</title>
+<link rel="stylesheet" href="lofi.css"><script src="lofi.js" defer></script>
+</head>
+<body>
+<nav class="pager" id="pager" aria-label="Screens"></nav>
+<div class="page">
+  <main class="phone" aria-label="Phone: settings and accessibility">
+    <div class="screen" style="gap:0">
+      <div class="topbar" style="margin-bottom:var(--s2)"><a class="btn round ghost" href="02-world-map.html" aria-label="Back">&lt;</a><span class="h1">Settings</span><span style="width:48px"></span></div>
+      <div class="setting"><span>Language</span><span class="seg" style="width:120px"><span class="on">TR</span><span>EN</span></span></div>
+      <div class="setting"><span>Music</span><span class="slider"></span></div>
+      <div class="setting"><span>Sound effects</span><span class="slider"></span></div>
+      <div class="setting"><span>Voice</span><span class="slider"></span></div>
+      <div class="setting"><span>Subtitles</span><span class="toggle on" role="img" aria-label="On"></span></div>
+      <div class="setting"><span>Text size</span><span class="seg" style="width:170px"><span class="on">100%</span><span>125%</span><span>150%</span></span></div>
+      <div class="setting"><span>Colorblind mode</span><strong class="cap" style="color:var(--ink)">Off &gt;</strong></div>
+      <div class="setting"><span>Reduce motion</span><span class="toggle" role="img" aria-label="Off"></span></div>
+      <div class="setting"><span>Haptics</span><span class="toggle on" role="img" aria-label="On"></span></div>
+      <div class="setting"><span>Left-handed HUD</span><span class="toggle" role="img" aria-label="Off"></span></div>
+      <div class="setting"><span>Joystick size</span><span class="seg" style="width:120px"><span>S</span><span class="on">M</span><span>L</span></span></div>
+      <div class="setting"><span>Auto ultimate</span><span class="toggle" role="img" aria-label="Off"></span></div>
+      <div class="setting"><span>Damage numbers</span><span class="toggle on" role="img" aria-label="On"></span></div>
+      <div class="setting"><span>Graphics quality</span><strong class="cap" style="color:var(--ink)">Auto (High) &gt;</strong></div>
+      <div class="setting"><span>Export playtest data</span><strong class="cap" style="color:var(--ink)">Share &gt;</strong></div>
+      <div class="row between cap" style="margin-top:var(--s3)"><span>Privacy · Terms · Credits</span><span>v0.1 (build 1)</span></div>
+    </div>
+  </main>
+  <section class="notes">
+    <h1>16 Settings + accessibility</h1>
+    <p class="ref">Specs: design-system.md 10, 11 · prd.md US-8.1, US-9.1, US-10.1</p>
+    <ol>
+      <li>Every item on the accessibility checklist lives here, in one flat list. No hidden sub-menus for the important ones.</li>
+      <li><b>Subtitles default ON.</b> Text size must not clip at 150%: test every screen at 150%.</li>
+      <li>Graphics quality shows the auto-detected tier in brackets; overriding never changes gameplay (D-003).</li>
+      <li>"Export playtest data" shares the telemetry JSONL via the iOS share sheet: how testers send data back.</li>
+      <li>Rows are ≥ 48 pt tall; toggles carry a text state for screen readers.</li>
+    </ol>
+  </section>
+</div>
+</body>
+</html>

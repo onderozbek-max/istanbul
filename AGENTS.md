@@ -14,6 +14,8 @@ zombie-overrun Istanbul. Portrait, one-thumb, Godot 4, **iOS first** (Android la
 7. `docs/level-001-istiklal.md`: the opening level in full detail
 8. `docs/narrative.md`, `docs/product.md` and `docs/business-plan.md`: story, strategy and
    monetization (context; guardrails and monetization principles are binding)
+9. `design/README.md`: wireframes of every key screen + the Level 1 map. **Copy these layouts
+   for all UI, even placeholder UI**, so the art pass is a reskin, not a redesign. Docs win on conflict.
 
 ## Source-of-truth rules
 - **Docs own intent.** Once implemented, `game/content/**/*.tres` owns the numbers.

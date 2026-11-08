@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1720 430" role="img" aria-labelledby="t d" font-family="system-ui,-apple-system,sans-serif">
+<title id="t">Level 1 "First Bite" layout map (Istiklal Avenue)</title>
+<desc id="d">Top-down map of the 14 m by 262 m corridor with the restaurant, segments A to D, props, spawn doors, the tram, the cat and manhole, the hold zone, scaffolding and the exit shutter. Scale 6 px per meter.</desc>
+<defs><pattern id="h" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" fill="#DEDEDE"/><line x1="0" y1="0" x2="0" y2="8" stroke="#6E6E6E" stroke-width="3"/></pattern></defs>
+<rect width="1720" height="430" fill="#F2F2F2"/>
+<rect x="100" y="158" width="372" height="84" fill="#FFFFFF" stroke="#B8B8B8"/>
+<text x="106" y="120" font-size="14" font-weight="800">A · PANIC</text>
+<text x="106" y="138" font-size="11" fill="#6E6E6E">~45 s · walkers · call starts · 3 bars</text>
+<text x="102" y="258" font-size="10" fill="#6E6E6E">y=0</text>
+<rect x="472" y="158" width="372" height="84" fill="#F7F7F7" stroke="#B8B8B8"/>
+<text x="478" y="120" font-size="14" font-weight="800">B · CHESTNUT CORNER</text>
+<text x="478" y="138" font-size="11" fill="#6E6E6E">~45 s · canister combo · 3 bars</text>
+<text x="474" y="258" font-size="10" fill="#6E6E6E">y=62</text>
+<rect x="844" y="158" width="420" height="84" fill="#FFFFFF" stroke="#B8B8B8"/>
+<text x="850" y="120" font-size="14" font-weight="800">C · TRAM TRACK</text>
+<text x="850" y="138" font-size="11" fill="#6E6E6E">~45 s · runners + crawler · 2 bars</text>
+<text x="846" y="258" font-size="10" fill="#6E6E6E">y=124</text>
+<rect x="1264" y="158" width="216" height="84" fill="#FFE9E3" stroke="#B8B8B8"/>
+<text x="1270" y="120" font-size="14" font-weight="800">D · HOLD</text>
+<text x="1270" y="138" font-size="11" fill="#6E6E6E">60 s · peak · stop spawns 56 s</text>
+<text x="1266" y="258" font-size="10" fill="#6E6E6E">y=194</text>
+<rect x="1480" y="158" width="192" height="84" fill="url(#h)" opacity=".6"/>
+<text x="1500" y="204" font-size="11" font-weight="700">not reachable</text>
+<rect x="1477" y="158" width="10" height="84" fill="#3A3A3A"/>
+<text x="1400" y="222" font-size="10" font-weight="800">scaffolding collapses (y=230)</text>
+<rect x="40" y="212" width="60" height="48" fill="#E6E2D8" stroke="#3A3A3A" stroke-width="2"/>
+<text x="70" y="204" font-size="11" font-weight="800" text-anchor="middle">RESTAURANT</text>
+<text x="70" y="240" font-size="9" text-anchor="middle">cold open +</text><text x="70" y="252" font-size="9" text-anchor="middle">2 easy zombies</text>
+<rect x="96" y="224" width="8" height="12" fill="#3DDCFF"/>
+<line x1="100" y1="158" x2="1672" y2="158" stroke="#14151F" stroke-width="4"/>
+<line x1="100" y1="242" x2="1672" y2="242" stroke="#14151F" stroke-width="4"/>
+<text x="100" y="98" font-size="11" fill="#6E6E6E">Right facade (x = +7 m)  |  player walks this way -&gt; (south, toward Tunel)</text>
+<text x="100" y="274" font-size="11" fill="#6E6E6E">Left facade (x = -7 m)</text>
+<line x1="100" y1="195.8" x2="1672" y2="195.8" stroke="#8A8F98" stroke-width="2"/>
+<line x1="100" y1="204.2" x2="1672" y2="204.2" stroke="#8A8F98" stroke-width="2"/>
+<rect x="184" y="154" width="12" height="8" fill="#6E6E6E"/>
+<rect x="274" y="238" width="12" height="8" fill="#6E6E6E"/>
+<rect x="364" y="154" width="12" height="8" fill="#6E6E6E"/>
+<rect x="454" y="238" width="12" height="8" fill="#6E6E6E"/>
+<rect x="544" y="154" width="12" height="8" fill="#6E6E6E"/>
+<rect x="634" y="238" width="12" height="8" fill="#6E6E6E"/>
+<rect x="724" y="154" width="12" height="8" fill="#6E6E6E"/>
+<rect x="814" y="238" width="12" height="8" fill="#6E6E6E"/>
+<rect x="904" y="154" width="12" height="8" fill="#6E6E6E"/>
+<rect x="994" y="238" width="12" height="8" fill="#6E6E6E"/>
+<rect x="1084" y="154" width="12" height="8" fill="#6E6E6E"/>
+<rect x="1174" y="238" width="12" height="8" fill="#6E6E6E"/>
+<rect x="1264" y="154" width="12" height="8" fill="#6E6E6E"/>
+<rect x="1354" y="238" width="12" height="8" fill="#6E6E6E"/>
+<rect x="1444" y="154" width="12" height="8" fill="#6E6E6E"/>
+<rect x="976" y="192.2" width="72" height="15.600000000000001" rx="4" fill="#D7263D" stroke="#14151F" stroke-width="2"/>
+<text x="1012" y="204" font-size="10" font-weight="800" fill="#fff" text-anchor="middle">TRAM</text>
+<rect x="513" y="163" width="14" height="14" fill="#E9A23B" stroke="#14151F" stroke-width="2"/>
+<text x="530" y="174" font-size="10" font-weight="700">simit cart</text>
+<rect x="573" y="217" width="14" height="14" fill="#B5651D" stroke="#14151F" stroke-width="2"/>
+<text x="590" y="228" font-size="10" font-weight="700">chestnut cart</text>
+<circle cx="700" cy="176" r="7" fill="#C0392B" stroke="#14151F" stroke-width="2"/>
+<text x="710" y="180" font-size="10" font-weight="700">gas</text>
+<circle cx="1360" cy="230" r="7" fill="#C0392B" stroke="#14151F" stroke-width="2"/>
+<text x="1370" y="234" font-size="10" font-weight="700">gas</text>
+<circle cx="1408" cy="182" r="7" fill="#C0392B" stroke="#14151F" stroke-width="2"/>
+<text x="1418" y="186" font-size="10" font-weight="700">gas</text>
+<circle cx="1156" cy="218" r="7" fill="#3A3A3A" stroke="#14151F" stroke-width="2"/>
+<text x="1166" y="222" font-size="10" font-weight="700">manhole (crawler)</text>
+<circle cx="1120" cy="239.0" r="7" fill="#F2F2F2" stroke="#14151F" stroke-width="2"/>
+<text x="1130" y="243.0" font-size="10" font-weight="700">cat (hiss)</text>
+<line x1="340" y1="158" x2="340" y2="242" stroke="#FF4D2E" stroke-dasharray="4 4" stroke-width="2"/>
+<text x="344" y="236" font-size="10" fill="#FF4D2E" font-weight="700">civilian turns</text>
+<line x1="640" y1="158" x2="640" y2="242" stroke="#FF4D2E" stroke-dasharray="4 4" stroke-width="2"/>
+<text x="644" y="172" font-size="10" fill="#FF4D2E" font-weight="700">cluster of 8 past the gas</text>
+<line x1="1090" y1="158" x2="1090" y2="242" stroke="#FF4D2E" stroke-dasharray="4 4" stroke-width="2"/>
+<line x1="1300" y1="158" x2="1300" y2="242" stroke="#FF4D2E" stroke-width="3"/>
+<text x="1304" y="172" font-size="10" fill="#FF4D2E" font-weight="700">hold starts (y=200)</text>
+<rect x="1444" y="148" width="24" height="10" fill="#3DDCFF" stroke="#14151F" stroke-width="2"/>
+<line x1="1456" y1="104" x2="1456" y2="148" stroke="#14151F" stroke-width="1.5"/><text x="1456" y="98" font-size="11" font-weight="800" text-anchor="middle">EXIT SHUTTER (x=+7, y=226)</text>
+<path d="M100 230 C340 212, 640 188, 880 200 S1060 227.0, 1240 206 S1390 182, 1456 164" fill="none" stroke="#3DDCFF" stroke-width="3" stroke-dasharray="2 6" stroke-linecap="round"/>
+<text x="40" y="330" font-size="13" font-weight="800">Legend</text>
+<rect x="40" y="346" width="14" height="12" fill="#6E6E6E" stroke="#14151F"/>
+<text x="62" y="356" font-size="11">spawn door (every 15 m, alternating walls)</text>
+<circle cx="467" cy="352" r="6" fill="#C0392B" stroke="#14151F"/>
+<text x="482" y="356" font-size="11">gas canister (60 dmg to enemies, 15 to player)</text>
+<line x1="880" y1="352" x2="896" y2="352" stroke="#3DDCFF" stroke-width="3"/>
+<text x="902" y="356" font-size="11">intended player path</text>
+<line x1="40" y1="378" x2="56" y2="378" stroke="#FF4D2E" stroke-width="3"/>
+<text x="62" y="382" font-size="11">scripted trigger line</text>
+<rect x="460" y="372" width="14" height="12" fill="#FFE9E3" stroke="#14151F"/>
+<text x="482" y="382" font-size="11">hold zone (60 s)</text>
+<text x="40" y="416" font-size="11" fill="#6E6E6E">Scale: 6 px = 1 m. Corridor 14 m x 262 m. Behind-spawns allowed only in C and D (&gt; 7 m behind, with a groan cue). Source of truth: docs/level-001-istiklal.md sections 6-7.</text>
+</svg>
