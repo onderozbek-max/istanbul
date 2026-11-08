@@ -88,15 +88,15 @@ In-engine, letterboxed, with two interactive beats. TR is the primary VO; subtit
 | # | Time | Shot | Line / sound |
 |---|---|---|---|
 | S1 | 0–6 s | Black. Döner sizzle, street noise, a distant tram bell. | — |
-| S2 | 6–14 s | Inside "Lezzet Dürüm Salonu". Emre (20, hoodie, earbuds) gets his dürüm at the window counter, takes an earbud out. | Usta: "Afiyet olsun, genç!" (Enjoy, young man!) |
+| S2 | 6–14 s | Inside "Lezzet Dürüm Salonu". Arda (20, hoodie, earbuds) gets his dürüm at the window counter, takes an earbud out. | Usta: "Afiyet olsun, genç!" (Enjoy, young man!) |
 | S3 | 14–22 s | Next table: two friends. One is pale, sweating, coughing; his dürüm is untouched. | Friend: "Abi, iyi misin? Yüzün bembeyaz." (Bro, you okay? You're white as a sheet.) |
 | S4 | 22–30 s | The wall TV cuts to breaking news. The waiter turns the volume up. The room goes quiet. | News: "SON DAKİKA: Şehrin birçok noktasında açıklanamayan saldırılar... Vatandaşların evlerinde kalması isteniyor." (BREAKING: unexplained attacks across the city... Citizens are urged to stay home.) |
-| S5 | 30–36 s | Slow-mo: the pale guy's dürüm falls to the floor. Emre's eyes follow it with real grief. | (Comedic beat, no line; a soft sad string note) |
+| S5 | 30–36 s | Slow-mo: the pale guy's dürüm falls to the floor. Arda's eyes follow it with real grief. | (Comedic beat, no line; a soft sad string note) |
 | S6 | 36–42 s | The pale guy lunges and bites his friend's shoulder. Screams, chairs topple, people run. | Screams, crash |
-| S7 | 42–52 s | Freeze → three comic panels: Emre's zombie-movie memory montage. | Emre (VO): "Kural bir: kafaya." (Rule one: the head.) · "Kural iki: asla ısırılma." (Rule two: never get bitten.) · "Kural üç... kural üç neydi?" (Rule three... what was rule three?) |
-| S8 | 52–58 s | The zombie turns from his friend toward Emre. Close-up on a fork on the counter. **INTERACTIVE: TAP** (icon on the fork, waits indefinitely). Emre grabs it. | — |
+| S7 | 42–52 s | Freeze → three comic panels: Arda's zombie-movie memory montage. | Arda (VO): "Kural bir: kafaya." (Rule one: the head.) · "Kural iki: asla ısırılma." (Rule two: never get bitten.) · "Kural üç... kural üç neydi?" (Rule three... what was rule three?) |
+| S8 | 52–58 s | The zombie turns from his friend toward Arda. Close-up on a fork on the counter. **INTERACTIVE: TAP** (icon on the fork, waits indefinitely). Arda grabs it. | — |
 | S9 | 58–64 s | Zombie lunges. **INTERACTIVE: SWIPE** toward the zombie (any direction accepted after 3 s of no input; we never fail here). Stab: 60 ms hit-stop, camera punch, comic "ÇAT!" lettering. Zombie drops. | SFX: "çat" |
-| S10 | 64–70 s | Emre stares at the fork, then at the body. The bitten friend and another diner start twitching. Letterbox slides away: control handed over. | Emre: "...Pardon." (...Sorry.) |
+| S10 | 64–70 s | Arda stares at the fork, then at the body. The bitten friend and another diner start twitching. Letterbox slides away: control handed over. | Arda: "...Pardon." (...Sorry.) |
 
 ## 5. Tutorial Flow (in order; one prompt at a time, ≤ 6 words + icon)
 
@@ -182,9 +182,10 @@ Times are relative to segment entry. "Budget" uses enemy costs from content-cata
 
 ### Exit (~10 s in-engine scene)
 - Shutter fully open → glowing arrow → player enters → exit trigger.
-- Inside the shop: the shopkeeper (an older man in a cardigan) pulls the shutter down behind Emre. Silence.
-- Phone screen: **"Hizmet yok" / "No service."** Emre: "Anne? ...Anne!"
-- **Title slam:** "SON DURAK" logo + subtitle **"Ataköy: 17 km"**. → Results.
+- Inside the shop: the shopkeeper (an older man in a cardigan) pulls the shutter down behind Arda. Silence.
+- Phone screen: **"Sinyal yok" / "No signal."** Arda: "Anne? ...Anne!"
+- **Title slam:** game logo (title per product.md §1.1) + subtitle **"Ataköy: 17 km"**. → Results.
+  If the title is *No Signal*, the phone's "No signal" text morphs straight into the logo.
   (No dizi triple zoom here; it's reserved for L10/L20/L30/L100, design-system.md §9.2.)
 
 ## 8. XP, Cards and Difficulty Tuning
@@ -202,17 +203,17 @@ gameplay never pauses for it. Lines play at segment entries (after the first car
 
 | When | Line (TR) | EN |
 |---|---|---|
-| A | Emre: "Anne? Anne, duyuyor musun?" | Mom? Mom, can you hear me? |
-| A | Anne: "Emre! Neredesin? Haberleri gördün mü?" | Emre! Where are you? Did you see the news? |
-| A | Emre: "Gördüm... yani, yaşadım. Taksim'deyim. Eve geliyorum." | I saw it... well, I lived it. I'm in Taksim. I'm coming home. |
+| A | Arda: "Anne? Anne, duyuyor musun?" | Mom? Mom, can you hear me? |
+| A | Anne: "Arda! Neredesin? Haberleri gördün mü?" | Arda! Where are you? Did you see the news? |
+| A | Arda: "Gördüm... yani, yaşadım. Taksim'deyim. Eve geliyorum." | I saw it... well, I lived it. I'm in Taksim. I'm coming home. |
 | B | Anne: "Metroya binme, her şey durmuş!" | Don't take the metro, everything's stopped! |
-| B | Emre: "Taksi?" | Taxi? |
+| B | Arda: "Taksi?" | Taxi? |
 | B | Anne: "Trafik kilit, oğlum. Kimse kıpırdamıyor." | Traffic's gridlocked, son. Nobody's moving. |
-| B | Emre (while fighting): "Yani... her zamanki gibi." | So... like always. |
+| B | Arda (while fighting): "Yani... her zamanki gibi." | So... like always. |
 | C | Anne (choppy): "Baban... diyor ki... [cızırtı] ...sakın..." | Your dad... says... [static] ...don't... |
-| C | Emre: "Anne? Kesiliyorsun!" | Mom? You're breaking up! |
+| C | Arda: "Anne? Kesiliyorsun!" | Mom? You're breaking up! |
 | D | Anne (1 bar): "...seni seviyoruz... eve gel..." | ...we love you... come home... |
-| Exit | Phone: "Hizmet yok." Emre: "Anne? ...Anne!" | No service. Mom? ...Mom! |
+| Exit | Phone: "Sinyal yok." Arda: "Anne? ...Anne!" | No signal. Mom? ...Mom! |
 
 ## 10. Audio
 
@@ -265,7 +266,7 @@ game-design.md §10).
 
 | Category | Assets |
 |---|---|
-| Hero | Emre: full animation set (design-system.md §8), fork-grab and stab cinematic poses, phone-call idle |
+| Hero | Arda: full animation set (design-system.md §8), fork-grab and stab cinematic poses, phone-call idle |
 | Enemies | Walker × 4 outfits (office, student, waiter, shopper), Runner (jogger), Crawler, scripted "pale guy" |
 | NPCs | Fleeing crowd silhouettes × 8, usta (döner master), waiter, friend, shopkeeper, the cat |
 | Environment | İstiklal paving + rails tileset; facade kit (6 building modules, 4 shopfronts, 2 passages); restaurant interior; collapsed scaffolding; shop interior (exit scene) |

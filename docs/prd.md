@@ -1,4 +1,4 @@
-# Son Durak: PRD, Vertical Slice (Chapter 1, Levels 1–30)
+# Project Istanbul: PRD, Vertical Slice (Chapter 1, Levels 1–30)
 
 > **Status:** v0.1 · 2026-11-08 · Owner: Onder · Reviewer: Opus (lead) · Executor: TBD
 > **Strategy and decisions:** [product.md](product.md) · **Story:** [narrative.md](narrative.md)
@@ -14,7 +14,7 @@ It does not repeat strategy, story or numbers; it links to the doc that owns the
 ## 1. Summary
 
 Build the first 30 levels of Chapter 1 (İstiklal → Karaköy & Galata → Galata Bridge) as a
-**playable, polished, testable mobile build** for Android and iOS. The slice has to prove three things:
+**playable, polished, testable mobile build** for iOS (Android port later, product.md D-014). The slice has to prove three things:
 
 1. **The core is fun.** The survivor-like loop holds players for multiple sessions.
 2. **The differentiators land.** Story beats, local setting, hero animation quality and
@@ -30,19 +30,19 @@ Build the first 30 levels of Chapter 1 (İstiklal → Karaköy & Galata → Gala
 | G1 | Fun, sticky core loop | Playtest: ≥ 70% of testers voluntarily play past L10; "would keep playing" ≥ 4/5 |
 | G2 | Story and setting feel distinct | Playtest: ≥ 60% name the story or Istanbul setting as a top reason they liked it |
 | G3 | Above-genre polish | Side-by-side blind preference vs. a genre leader on hero animation and game feel ≥ 50% |
-| G4 | Runs on budget phones | Low tier: 30 fps steady at peak enemy count on the reference low-end Android |
+| G4 | Runs on budget phones | Low tier: 30 fps steady at peak enemy count on the low reference iPhone |
 | G5 | Ready to scale | A new level can be added with **data only** (no code) in ≤ 2 hours |
 
 ### Non-goals (slice)
 Real ads or IAP SDKs (stubs only), cloud save, store, energy system, Chapters 2+,
-Defne/Lale as playable heroes, PvP, guilds, live events, Remote Config backend
+Mila/Ada as playable heroes, PvP, guilds, live events, Remote Config backend
 (local config file only), localization beyond TR + EN. See also product.md §16.
 
 ## 3. Target Users (personas)
 
 | Persona | Profile | Needs from the slice |
 |---|---|---|
-| **Ece, 17, Kadıköy** | High-schooler, plays on a budget Android during the commute, lives on TikTok | Instantly recognizable Istanbul, jokes she can share, runs smoothly on her phone |
+| **Ece, 17, Kadıköy** | High-schooler, plays on her sister's hand-me-down iPhone 11 during the commute, lives on TikTok (her Android friends arrive with the port) | Instantly recognizable Istanbul, jokes she can share, runs smoothly on an old phone |
 | **Mert, 24, Berlin** | Turkish diaspora, iPhone, plays survivor-likes, nostalgic about Istanbul | Polished feel, Turkish VO and humor, German/English UI later |
 | **Jake, 29, Ohio** | Genre fan, has played the big survivor-likes, wants something new | Build depth, game feel, a story worth following, no language barrier |
 
@@ -54,14 +54,14 @@ Defne/Lale as playable heroes, PvP, guilds, live events, Remote Config backend
 | Category | In slice | Source of truth |
 |---|---|---|
 | Levels | **1–30** (3 districts × 10) | content-catalog.md §7, level docs |
-| Heroes | **Emre** (playable), **Kaan** (joins in L30, tag-switch enabled in L30 phase 3) | content-catalog.md §1 |
+| Heroes | **Arda** (playable), **Kaan** (joins in L30, tag-switch enabled in L30 phase 3) | content-catalog.md §1 |
 | Card weapons | Fork (signature) + Tea Glass, Simit, Seagulls, Döner Skewer, Chestnut Mortar, Tram Bell | content-catalog.md §2 |
 | Passives | Sneakers, Puffer Jacket, Ayran, Turkish Coffee, Butter, Teapot | content-catalog.md §3 |
 | Evolutions | Semaver Storm, İskender Lance, Chestnut Volcano, Tram Line | content-catalog.md §4 |
 | Enemies | Walker, Runner, Crawler, Brute, Spitter, Exploder, Tourist, Fisherman (+ Elite variants) | content-catalog.md §5 |
 | Bosses | L5 Kestaneci, L10 Vatman, L15 Tour Guide, L20 The Bride, L25 Big Fisherman, L30 Kaan | content-catalog.md §6 |
 | Story | Level 1 cold open (in-engine), motion comics at L10, L20, L30; banter barks | narrative.md, level-001 |
-| Meta | Hero level, 4 gear slots + merge, Jeton/Hurda, stars, world route map | game-design.md §8 |
+| Meta | Hero levels, Survival Skills (Arda + Kaan), Workshop weapon mastery (cap M5), 4 gear slots + merge, 4 currencies, stars, world route map | game-design.md §8.1–8.7 |
 
 ### Feature scope (epics)
 E1 Cold open & onboarding · E2 Core combat · E3 Build system (cards, evolutions) ·
@@ -145,8 +145,9 @@ Format: *As a [persona], I want [X], so that [Y].* **AC** = acceptance criteria 
   **AC:** world map shows the Taksim → Ataköy route with level nodes, the current position,
   and "X.X / 17 km" progress; tapping a node shows stars and the replay option.
 - **US-7.2** As a player, I want to get stronger between runs.
-  **AC:** hero levels and 4 gear slots with merge (3 identical → next rarity) per
-  game-design.md §8; all costs are data-driven.
+  **AC:** hero levels, Survival Skills trees, Workshop mastery and 4 gear slots with merge
+  (3 identical → next rarity) per game-design.md §8.2–8.6; all costs are data-driven;
+  every earn/spend logs `currency_flow`.
 - **US-7.3** As a player, I want rewards for doing well.
   **AC:** 3 stars per level (clear / no revive / ≥ 50% HP at end); star chests per district.
 
@@ -166,7 +167,7 @@ Format: *As a [persona], I want [X], so that [Y].* **AC** = acceptance criteria 
 ### E10: Telemetry & balance tooling
 - **US-10.1** As the PM/reviewer, I want every playtest to produce data.
   **AC:** telemetry events in game-design.md §10 are written as JSONL to a local file,
-  exportable from the settings screen (share sheet) and from the device via adb.
+  exportable from the settings screen (share sheet) and, in dev builds, from the app's Files folder (file sharing enabled).
 - **US-10.2** As the designer, I want to balance without playing 500 runs by hand.
   **AC:** a headless bot simulator runs N seeds per level with 3 bot strategies and writes
   a CSV report (clear rate, time to first level-up, level-ups, deaths by cause).
@@ -176,10 +177,14 @@ Format: *As a [persona], I want [X], so that [Y].* **AC** = acceptance criteria 
   **AC:** versioned local save with migrations; saves after every level, purchase, upgrade
   and setting change; corrupted save → fallback to backup slot, never a crash.
 
-### E12: Monetization stubs
+### E12: Monetization stubs (real store, ads and passes come in soft-launch prep)
 - **US-12.1** As the PM, I want monetization touchpoints testable without real SDKs.
-  **AC:** "Revive (watch ad)", "Double reward (watch ad)" and "Reroll (watch ad)" call an
-  `AdsService` interface with a fake implementation (3 s placeholder); results are logged to telemetry.
+  **AC:** every rewarded-ad placement in game-design.md §8.13 calls an `AdsService` interface
+  with a fake implementation (3 s placeholder); a fake `IapService` can grant a test bundle;
+  results are logged to telemetry.
+- **US-12.2** As the PM, I want the economy ready for monetization.
+  **AC:** all four currencies exist with sinks and faucets per game-design.md §8.1; power caps
+  per §8.15 are enforced; the bot simulator reports currency earned per level.
 
 ---
 
@@ -187,8 +192,8 @@ Format: *As a [persona], I want [X], so that [Y].* **AC** = acceptance criteria 
 
 | Area | Requirement |
 |---|---|
-| Platforms | Android 10+ and iOS 15+. Portrait only. |
-| Reference devices | **Low:** entry Android (3–4 GB RAM, ~2023 entry chipset). **Mid:** mid-range Android/iPhone XR-11 class. **High:** recent flagship. |
+| Platforms | **iOS 16+** first (iPhone XS/XR and newer). Android 10+ in the port phase. Portrait only. |
+| Reference devices | **Low:** iPhone 11 or iPhone SE (2nd gen), A13 class; buy a used one for testing. **Mid:** iPhone 13. **High:** iPhone 15 Pro Max / iPhone 16 Pro (owner's devices). |
 | Frame rate | Low: 30 fps steady (p95 frame time ≤ 36 ms) at 300 on-screen enemies. Mid/High: 60 fps (p95 ≤ 18 ms). |
 | Simulation | Fixed 60 Hz on all tiers; identical results for identical seed + inputs. |
 | Load times | Cold start to main menu ≤ 6 s (Low); level load ≤ 3 s (Low). |

@@ -1,4 +1,4 @@
-# Son Durak: Content Catalog (Vertical Slice + Planned)
+# Project Istanbul: Content Catalog (Vertical Slice + Planned)
 
 > **Status:** v0.1 · 2026-11-08 · Owns: starting numbers for heroes, weapons, passives,
 > evolutions, enemies, bosses, pickups, interactables, and the L1–30 level list.
@@ -12,10 +12,10 @@
 
 | ID | Name | HP | Armor | Move (m/s) | Signature weapon | Tag-in move | Ultimate | Available |
 |---|---|---|---|---|---|---|---|---|
-| `hero_emre` | Emre | 100 | 0 | 3.2 | Fork | **Stab-Dash:** 2 m dash, 20 dmg to enemies passed | **Fork Frenzy:** chain-dashes through up to 7 enemies (40 dmg each) over 1.2 s, invulnerable | Slice (start) |
+| `hero_arda` | Arda | 100 | 0 | 3.2 | Fork | **Stab-Dash:** 2 m dash, 20 dmg to enemies passed | **Fork Frenzy:** chain-dashes through up to 7 enemies (40 dmg each) over 1.2 s, invulnerable | Slice (start) |
 | `hero_kaan` | Kaan | 180 | 2 | 2.6 | Anchor | **Mini Slam:** r 1.5 m, 25 dmg, knockback 1 m | **Ground Slam:** r 3.5 m, 80 dmg, stun 1 s, knockback 2 m | Slice (L30) |
-| `hero_defne` | Defne | 70 | 0 | 4.2 | Twin Batons | **Dash:** 3 m through enemies, 15 dmg | **Sprint Blitz:** 3 rapid dashes (35 dmg each), leaves a 40% slow trail for 3 s | Chapter 2 |
-| `hero_lale` | Lale | 80 | 0 | 3.2 | Slingshot | **Calm Pulse:** r 3 m, slow 40% for 2 s | **Calm Field:** r 5 m, slow 60% for 4 s + volley of 12 bolts (20 dmg each) | Chapter 2 |
+| `hero_mila` | Mila | 70 | 0 | 4.2 | Twin Batons | **Dash:** 3 m through enemies, 15 dmg | **Sprint Blitz:** 3 rapid dashes (35 dmg each), leaves a 40% slow trail for 3 s | Chapter 2 |
+| `hero_ada` | Ada | 80 | 0 | 3.2 | Slingshot | **Calm Pulse:** r 3 m, slow 40% for 2 s | **Calm Field:** r 5 m, slow 60% for 4 s + volley of 12 bolts (20 dmg each) | Chapter 2 |
 
 **Companion signature weapons** (scale with hero meta level, not with in-run cards):
 | ID | Behavior | Damage | Cooldown | Area / range | Notes |
@@ -152,7 +152,7 @@ All telegraphs ≥ 0.8 s for bosses. Damage values are base (scaled by nothing e
 - Calls fisherman adds (4) every 20 s.
 
 ### L30 · Kaan, story fight · Composure 5,000 (non-lethal)
-- **Phases 1–2 (vs Kaan):** he thinks Emre is infected.
+- **Phases 1–2 (vs Kaan):** he thinks Arda is infected.
   - *Anchor Swing:* 270° arc r 2.5 m, 1.0 s telegraph, 20 dmg.
   - *Anchor Throw:* line 7 m, 0.9 s telegraph, 18 dmg, then he reels it back (second hit on the way back).
   - *Ground Slam:* r 3 m, 1.2 s telegraph, 25 dmg.
@@ -172,7 +172,7 @@ Template: game-design.md §6. Durations are targets for an average player.
 | L | Type | Mods | Intro | Duration | Story hook |
 |---|---|---|---|---|---|
 | 1 | Route | — | Walker, Runner, Crawler (scripted) | 3.5 min | Cold open, call drops (see level-001) |
-| 2 | Arena | — | Simit carts | 4 min | Emre tries the phone again: no signal |
+| 2 | Arena | — | Simit carts | 4 min | Arda tries the phone again: no signal |
 | 3 | Route | — | Gas canister combos | 4 min | Bark: "Metro's closed. Of course it is." |
 | 4 | Arena | — | **Brute** | 5 min | — |
 | 5 | Mini-boss | — | **Kestaneci** | 5 min | Chestnut cart becomes a weapon idea |
@@ -180,13 +180,13 @@ Template: game-design.md §6. Durations are targets for an average player.
 | 7 | Arena | — | First **Elite** | 6 min | — |
 | 8 | Route | night | **Exploder** | 5 min | Streetlights fail one by one |
 | 9 | Arena | horde | — | 6 min | — |
-| 10 | Boss | — | **Vatman** | 7 min | Motion comic: tram crash, Emre heads downhill to Karaköy |
+| 10 | Boss | — | **Vatman** | 7 min | Motion comic: tram crash, Arda heads downhill to Karaköy |
 
 ### District 2 · Karaköy & Galata (Levels 11–20)
 | L | Type | Mods | Intro | Duration | Story hook |
 |---|---|---|---|---|---|
 | 11 | Route | — | **Tourist** | 5 min | Steep streets downhill from Tünel |
-| 12 | Arena | — | **Paşa the cat** (early-warning hisses) | 5 min | Paşa adopts Emre |
+| 12 | Arena | — | **Paşa the cat** (early-warning hisses) | 5 min | Paşa adopts Arda |
 | 13 | Route | — | Stairs as chokepoints | 5 min | Historic stairs down to Karaköy |
 | 14 | Arena | — | — | 6 min | Galata Tower square |
 | 15 | Mini-boss | — | **Tour Guide** | 6 min | — |
@@ -194,7 +194,7 @@ Template: game-design.md §6. Durations are targets for an average player.
 | 17 | Arena | — | — | 6 min | Waterfront by the pier |
 | 18 | Route | night | — | 6 min | — |
 | 19 | Arena | horde | — | 7 min | — |
-| 20 | Boss | — | **The Bride** | 8 min | Motion comic: the wedding café; Emre sees the bridge |
+| 20 | Boss | — | **The Bride** | 8 min | Motion comic: the wedding café; Arda sees the bridge |
 
 ### District 3 · Galata Bridge (Levels 21–30)
 | L | Type | Mods | Intro | Duration | Story hook |

@@ -1,4 +1,4 @@
-# Son Durak: Design System
+# Project Istanbul: Design System
 
 > **Status:** v0.1 · 2026-11-08 · Owns: art direction, tokens, typography, HUD/UI components,
 > combat readability, game feel, animation, story presentation, localization and
@@ -107,7 +107,7 @@ Text size setting scales all text by 100 / 125 / 150%; layouts must not clip at 
 |                                      |
 |                                      |
 | [Kaan]                               |  bottom-left: squad portraits (tag)
-| [Emre]                        (ULT)  |  bottom-right: ultimate
+| [Arda]                        (ULT)  |  bottom-right: ultimate
 |   <-- floating joystick area -->     |  lower 60% of the screen
 +--------------------------------------+
 ```
@@ -250,7 +250,7 @@ and select boss beats (L10, L20, L30, L100) so it stays special.
 | **Squad portrait** | 132 px circle, HP ring, cooldown sweep, ultimate glow |
 | **Joystick** | Base 1.1 cm radius, knob 0.45 cm; 30% opacity when idle, 70% when active |
 | **Results screen** | Stars (animated in sequence), rewards count-up, cause of death + tip on loss, buttons: Retry / Map / Double reward (ad stub) |
-| **World map** | Stylized illustrated map of Istanbul; route line Taksim → Ataköy; level nodes (locked / available / 1–3 stars / boss icon); "X.X / 17 km" progress; current position = Emre token |
+| **World map** | Stylized illustrated map of Istanbul; route line Taksim → Ataköy; level nodes (locked / available / 1–3 stars / boss icon); "X.X / 17 km" progress; current position = Arda token |
 | **Gear tile** | Rarity frame (§3.3), item icon, level badge, merge-ready glow |
 | **Currency chip** | Icon + amount; tap → source tooltip |
 | **Toast** | Top center, max 1 at a time, 2.5 s |

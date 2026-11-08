@@ -1,4 +1,4 @@
-# Son Durak: Execution Plan (Vertical Slice)
+# Project Istanbul: Execution Plan (Vertical Slice)
 
 > **Status:** v0.1 · 2026-11-08 · Owns: who does what, milestones, review protocol, prompt kit.
 > **What to build:** [prd.md](prd.md). **How it's structured:** [architecture.md](architecture.md).
@@ -30,7 +30,8 @@ Pick the executor by these criteria, not by brand:
 4. **Test-first habits:** writes and runs tests unprompted.
 5. **Cost/speed:** a full milestone in days, not weeks.
 
-### Bake-off (recommended, about half a day)
+### Bake-off (confirmed by Onder, about half a day)
+**Candidates:** Claude Sonnet 5.5 and GPT Sol 6.1.
 Give each candidate the **same kickoff prompt** (§6.1) on separate branches
 (`bakeoff/<model>`), limited to **M0-T1 → M0-T3**. The lead scores both:
 
@@ -67,7 +68,7 @@ Durations assume one executor working steadily; compress if velocity allows.
 | T1 | Create the Godot 4 project in `game/`, pin the version in AGENTS.md, folder skeleton (architecture.md §3), the 3 autoload stubs, Godot `.gitignore` entries | Project opens; headless run exits 0 |
 | T2 | Install GUT; add `tools/test.sh`; one real unit test (XP table from game-design.md §4.5) | `tools/test.sh` passes |
 | T3 | Benchmark scene: SoA swarm (500 walkers, separation, spatial hash), projectile pool (200), XP droplets (300), MultiMesh rendering, perf overlay, JSON results file | Headless sim benchmark prints ms/tick; scene runs on desktop |
-| T4 | Android debug export; run the benchmark on the Low reference device | Results JSON from the device |
+| T4 | iOS export (Godot → Xcode project → device): run the benchmark on the **Low reference iPhone** (A13 class) **and** on the iPhone 15 Pro Max / 16 Pro | Results JSON from each device |
 | T5 | Packet `reviews/REVIEW-M0.md` with numbers + recommendation for D-004 | Lead decides the engine |
 
 ### M1: First Playable, Gray Box (weeks 2–3) — **"Is it fun?" checkpoint**
@@ -75,7 +76,7 @@ Durations assume one executor working steadily; compress if velocity allows.
 |---|---|---|
 | T1 | `core/`: stats + modifiers + damage + caps + XP curve + card weighting, with unit tests | Values match game-design.md §4–5 tables |
 | T2 | InputRouter, floating joystick, desktop controls | US-2.1 AC |
-| T3 | Emre placeholder (capsule + ring), camera with look-ahead | Camera spec (game-design.md §2) |
+| T3 | Arda placeholder (capsule + ring), camera with look-ahead | Camera spec (game-design.md §2) |
 | T4 | Swarm promoted to `sim/`: walker + runner Defs, contact damage, deaths, XP droplets, pickup radius | 300 enemies at 60 fps on desktop |
 | T5 | Weapon framework + Fork + Tea Glass; level-up card UI (placeholder) | US-3.1 AC |
 | T6 | Arena test level (30 × 30 m), simple budget spawner, run timer, death → results stub | A complete run loop |
@@ -107,7 +108,7 @@ Durations assume one executor working steadily; compress if velocity allows.
 |---|---|---|
 | T1 | **Style frames (6–10)**: Onder + lead approve. **Blocking** for all other art | Approved frames committed in `art/style-frames/` |
 | T2 | Style model + asset pipeline + `art/PROVENANCE.csv` | design-system.md §12 |
-| T3 | Emre's full animation set; walker/runner/crawler; Level 1 environment kit and props | level-001 §14 |
+| T3 | Arda's full animation set; walker/runner/crawler; Level 1 environment kit and props | level-001 §14 |
 | T4 | UI kit: HUD, cards, results, call widget, settings | design-system.md §13 |
 | T5 | Game-feel spec, VFX, music layers, SFX, temp VO | design-system.md §7, §14, §15 |
 | T6 | Quality tiers, device detection, HD-asset delivery stub; perf pass on the Low device | US-9.1, US-9.2 AC |
@@ -122,7 +123,7 @@ limited to capturing clean footage and screenshots from the M4 build.
 | Task | Description | AC |
 |---|---|---|
 | T1 | Levels 2–10 (data + maps via the district template); Vatman boss; Kestaneci polish | content-catalog.md §6–7 |
-| T2 | Meta: hero levels, 4 gear slots + merge, currencies, star chests | game-design.md §8 |
+| T2 | Meta: hero levels, Survival Skills (Arda), Workshop mastery, 4 gear slots + merge, 4 currencies, star chests, power caps | game-design.md §8.1–8.7, §8.15 |
 | T3 | World map with route, nodes, km progress | US-7.1 AC |
 | T4 | Motion-comic player; L10 comic; dizi triple zoom | US-6.1 AC |
 | T5 | Bot balance pass for L1–10 | Within game-design.md §7 bands |
@@ -131,7 +132,7 @@ limited to capturing clean footage and screenshots from the M4 build.
 | Task | Description | AC |
 |---|---|---|
 | T1 | Levels 11–30; Tour Guide, The Bride (halay line), Big Fisherman, Kaan story fight | content-catalog.md §6–7 |
-| T2 | Squad, tag-switch, companion AI, ultimates | game-design.md §9 |
+| T2 | Squad, tag-switch, companion AI, ultimates; Kaan's Survival Skills tree | game-design.md §9, §8.3 |
 | T3 | Paşa early-warning behavior; L20 and L30 motion comics | narrative.md, content-catalog.md |
 | T4 | Bot balance pass for L11–30 | Within §7 bands |
 
@@ -139,9 +140,18 @@ limited to capturing clean footage and screenshots from the M4 build.
 | Task | Description | AC |
 |---|---|---|
 | T1 | Bug bash, performance, crash-free target, ads stubs, settings complete | prd.md §6 |
-| T2 | Internal test builds (Play internal testing, TestFlight) | Installable by testers |
+| T2 | Internal test builds via TestFlight | Installable by testers |
 | T3 | Playtest: 10–20 external testers; telemetry + short survey | Data collected |
 | T4 | Final packet with PRD §7 metrics | Go/no-go for soft-launch prep |
+
+### M8: Soft-Launch Prep: Monetization and Live Ops (weeks 21–26, scoped in detail after M7)
+| Task | Description | AC |
+|---|---|---|
+| T1 | Real IAP (StoreKit 2 via a Godot iOS plugin or RevenueCat) + receipt validation approach | Sandbox purchases work end to end |
+| T2 | Rewarded ads SDK with mediation; App Tracking Transparency prompt; SKAdNetwork IDs | Test ads fill on device |
+| T3 | Bazaar, Road Pass, Monthly Card, boosters, offers, daily tasks, login calendar | game-design.md §8.5, §8.8–8.14 |
+| T4 | Remote config + A/B framework (e.g., Firebase) behind `ConfigProvider` | Prices, caps and offers tunable without a release |
+| T5 | Store catalog per business-plan.md §6; App Store Connect products, privacy labels, age rating | Ready for App Review |
 
 ## 5. Review Protocol
 
@@ -191,7 +201,7 @@ guardrails (narrative.md, *Writer Guardrails*) · decision-log hygiene.
 
 ### 6.1 Kickoff prompt (executor)
 ```
-You are the executor for "Son Durak", a mobile survivor-like set in Istanbul.
+You are the executor for "Project Istanbul" (code name; game title in docs/product.md §1.1), a mobile survivor-like set in Istanbul.
 Read AGENTS.md first, then the docs in the order it lists. The docs are the source of truth.
 Your job right now: milestone M<N> from docs/execution-plan.md §4, tasks T<a>–T<b>.
 Rules: follow docs/architecture.md exactly (Godot 4 only, static typing, SoA swarm,
@@ -212,7 +222,7 @@ affected screenshots. Then stop.
 
 ### 6.3 Review prompt (lead, back with Opus)
 ```
-Review milestone M<N> of Son Durak. Read reviews/REVIEW-M<N>.md, inspect the diff
+Review milestone M<N> of Project Istanbul. Read reviews/REVIEW-M<N>.md, inspect the diff
 (<from>..<to>), run tools/test.sh and the bot simulator where relevant, view the screenshots,
 and write reviews/FEEDBACK-M<N>.md per execution-plan.md §5.3. Update docs if decisions changed.
 ```

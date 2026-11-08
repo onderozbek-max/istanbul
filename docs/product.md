@@ -1,8 +1,9 @@
-# Son Durak: Product Decisions & Principles
+# Project Istanbul: Product Decisions & Principles
 
-> **Status:** Draft v0.1 · 2026-11-08 · Owner: Onder
+> **Status:** Draft v0.2 · 2026-11-08 · Owner: Onder
 > **Scope:** Product, design, tech and business decisions. The story lives in
-> [narrative.md](narrative.md); this doc only references it (DRY).
+> [narrative.md](narrative.md); money lives in [business-plan.md](business-plan.md).
+> This doc only references them (DRY).
 
 ---
 
@@ -11,6 +12,19 @@
 **A story-driven survivor-like set in a zombie-overrun Istanbul.** It plays like Survivor.io
 but feels like a Turkish dizi: a squad you care about, a real route across real neighborhoods,
 and cliffhangers that bring players back.
+
+### 1.1 Title (D-012, proposed): the only place the game title is defined
+Code name: **Project Istanbul**. The title must work in Turkish **and** globally, and must
+franchise to other cities as `<Title>: <City>`.
+
+| Candidate | Turkish store name | Why | Risk |
+|---|---|---|---|
+| **No Signal: Istanbul** (recommended) | *Sinyal Yok: İstanbul* | Built into the story (networks die, the dropped call, the signal bars on the HUD). Every Gen Z player on earth knows the panic of "no signal". Level 1's phone text can morph straight into the logo. Franchises cleanly: *No Signal: Athens* | Needs trademark/App Store checks; "no signal" is a common phrase (harder to own in search, so the city carries it) |
+| **Last Stop: Istanbul** | *Son Durak: İstanbul* | Great transit pun in Turkish; fits the journey | Collides with *Last Stop* (Variable State / Annapurna, 2021) in English search |
+| **Homebound: Istanbul** | *Eve Dönüş: İstanbul* | Emotional, says "journey home" | Generic; crowded in search |
+
+**Before locking:** App Store search, trademark searches (USPTO, EUIPO, TÜRKPATENT), domain and
+social handles. The App Store subtitle carries the genre keywords (e.g., "Zombie Survival RPG").
 
 ## 2. Why this, why now
 
@@ -33,6 +47,13 @@ A Turkey-only game can get lots of downloads and earn little.
 | Turkish diaspora (Germany ~3M, NL, AT...) | Higher spend, nostalgia | German/English UI, the same local soul |
 | Global survivor-like / zombie fans | Biggest market | Universal visual humor, story, polish |
 
+### Platform: iOS first (D-014)
+Build and launch on **iOS first** (owner's hardware and developer accounts, higher spend per
+player, strong in the diaspora and global markets). Turkey itself is mostly **Android**, so an
+Android port is required before any big Turkish growth push. The architecture stays
+cross-platform (Godot), so the port is mostly store, SDK and device-QA work. Details:
+business-plan.md §4.
+
 ## 3. Product Pillars
 
 Every feature has to support at least one pillar. If it supports none, cut it.
@@ -42,7 +63,7 @@ Every feature has to support at least one pillar. If it supports none, cut it.
 2. **Story is the differentiator.** Characters, bonds and cliffhangers are features, not decoration.
 3. **Polish where the eyes are.** Spend quality on the heroes, game feel and story scenes,
    not on zombie #347.
-4. **One game, every phone.** Same gameplay on a budget Android and a flagship; only the visuals scale.
+4. **One game, every phone.** Same gameplay on an old budget phone and a flagship; only the visuals scale.
 5. **Data decides.** Release timing, difficulty and economy are tuned from live metrics
    through remote config.
 6. **Solo-sized scope.** Built by one AI-assisted builder. YAGNI is policy, not advice.
@@ -63,7 +84,7 @@ loot & story beat → upgrade squad / weapons / vehicle → next level`
 | # | Feature | Why it matters |
 |---|---|---|
 | D1 | **Squad with tag-switch:** swap control between heroes mid-run; the others fight automatically | Role variety, more of every hero on screen |
-| D2 | **Distinct hero roles:** tank (Kaan), speedster (Defne), versatile (Emre), ranged/support (Lale) | Reasons to invest in everyone |
+| D2 | **Distinct hero roles:** tank (Kaan), speedster (Mila), versatile (Arda), ranged/support (Ada) | Reasons to invest in everyone |
 | D3 | **Vehicle levels:** scooter (Ch. 2), car (Ch. 3), with a garage/upgrade meta | Pace changes; makes the "toolkit" story real |
 | D4 | **Human enemies fight differently:** cover, flanking, loot theft vs. zombie swarms | Same controls, new tactics |
 | D5 | **Interactive scenery:** simit carts, tea glasses, gas canisters, the döner skewer | Local flavor through gameplay |
@@ -75,10 +96,10 @@ loot & story beat → upgrade squad / weapons / vehicle → next level`
 ### Characters (stats summary; personalities in narrative.md)
 | Hero | HP | Speed | Damage | Unique |
 |---|---|---|---|---|
-| Emre | Mid | Mid | Mid | Spec in any direction; hacking and crafting |
+| Arda | Mid | Mid | Mid | Spec in any direction; hacking and crafting |
 | Kaan | High | Low | High | Ground Slam; draws aggro |
-| Defne | Low | Very high | Mid | Dash strikes; kiting |
-| Lale | Low | Mid | Mid (ranged) | *Calm* aura slows zombies (also a story clue) |
+| Mila | Low | Very high | Mid | Dash strikes; kiting |
+| Ada | Low | Mid | Mid (ranged) | *Calm* aura slows zombies (also a story clue) |
 
 ---
 
@@ -140,8 +161,9 @@ premium version; budget phones get a lighter one. **Gameplay is identical on eve
 - **Game feel is mostly free:** hit-stop, screen shake, knockback, punchy death animations, audio.
 - **Auto-detect the tier on first launch,** and let players override it in settings.
 - **Keep the download small:** base install < 150 MB. HD assets download after install,
-  only on capable phones (Play Asset Delivery / iOS On-Demand Resources).
-- **Performance budgets:** low tier 30 fps steady on a ~3 GB RAM Android; high tier 60 fps.
+  only on capable phones (iOS On-Demand Resources; Play Asset Delivery when Android comes).
+- **Performance budgets:** low tier 30 fps steady on the low reference iPhone (A13 class:
+  iPhone 11 / SE 2nd gen); high tier 60 fps on iPhone 15 Pro Max / 16 Pro.
   Tested on real devices, every milestone.
 - **Cost to remember:** every tier multiplies QA. Ship with **3 tiers max** (Low / Mid / High).
 
@@ -161,14 +183,13 @@ premium version; budget phones get a lighter one. **Gameplay is identical on eve
 
 ## 10. Monetization
 
-- **Rewarded ads:** revives, double loot, extra skill reroll. Always optional.
-- **Season pass ("Survivor Pass"):** cosmetics plus upgrade materials, refreshed per event cycle.
-- **Cosmetics:** hero outfits, scooter/car skins, **cats**.
-- **Starter / chapter packs:** clear-value bundles, priced regionally.
-- **Regional pricing:** Turkish lira pricing set deliberately; diaspora markets priced locally.
-- **Avoid early:** paid random loot (gacha). Turkey is strict on gambling, stores require
-  published odds, and it hurts trust. Revisit only with legal review.
-- **No hard energy walls** in the first 30 levels. Retention first, monetization second.
+Monetization is designed **into** the game systems, not bolted on. The full plan (principles,
+system-by-system hooks, store catalog, pricing, ads, KPIs, revenue model) lives in
+[business-plan.md](business-plan.md); the mechanics of each system live in
+[game-design.md](game-design.md) §8. Headline rules:
+- **Everything that affects power is earnable by playing;** money buys speed, convenience and style.
+- **No paid random loot,** no interstitial ads in v1, the story is never paywalled.
+- **Retention first:** no energy system in the slice; soft launch A/B tests decide.
 
 ## 11. Architecture & Tech
 
@@ -176,12 +197,12 @@ premium version; budget phones get a lighter one. **Gameplay is identical on eve
   bosses, NPCs, food, landmarks, music, factions, strings) lives in a **content pack**
   (data + assets). The engine knows nothing about Istanbul. New city = new pack, no engine changes.
 - **Engine: open decision (D-004).** Lean **Godot 4** (text-based scenes and scripts are
-  easy for AI agents to edit). **Week-1 stress test:** 500 enemies at 30 fps on a low-end
-  Android. If Godot fails, or its ad/IAP plugins are too immature, switch to **Unity 6**.
+  easy for AI agents to edit). **Week-1 stress test:** 500 enemies at 30 fps on the low
+  reference iPhone. If Godot fails, or its ad/IAP plugins are too immature, switch to **Unity 6**.
 - **Backend:** Firebase (analytics, Crashlytics, Remote Config, A/B tests). No custom server
   for v1.
 - **Payments & ads:** RevenueCat (IAP), AppLovin MAX or AdMob (mediation).
-- **Save data:** local + cloud save (Play Games / Game Center).
+- **Save data:** local + cloud save (iCloud / Game Center first).
 
 ### Toolchain (solo AI builder)
 | Need | Tool |
@@ -192,7 +213,7 @@ premium version; budget phones get a lighter one. **Gameplay is identical on eve
 | Audio | Suno/Udio (music), ElevenLabs (SFX, temp VO), human VO for key scenes |
 | Localization | AI translation + native reviewers (TR, EN, DE; later EL, AR) |
 | Marketing | CapCut, TikTok, Instagram Reels |
-| Stores | Apple Developer ($99/yr), Google Play ($25 once), a Mac or cloud build for iOS |
+| Stores | Apple Developer (owner has accounts); a Mac with Xcode for iOS builds; Google Play ($25 once) when Android comes |
 
 ## 12. Metrics & Targets
 
@@ -222,7 +243,7 @@ premium version; budget phones get a lighter one. **Gameplay is identical on eve
 
 | Phase | Duration | Exit criteria |
 |---|---|---|
-| **0. Engine stress test** | Week 1 (M0) | 500 enemies at 30 fps on a low-end Android (D-004) |
+| **0. Engine stress test** | Week 1 (M0) | 500 enemies at 30 fps on the low reference iPhone (D-004) |
 | **1. Core prototype** | Weeks 2–3 (M1) | Gray-box run is fun for Onder + 5 testers |
 | **2. Systems + Level 1** | Weeks 4–11 (M2–M4) | Level 1 fully beautiful and playable |
 | **3. Demand test** | Weeks 10–12, parallel to M4's end | Key art + Level 1 footage TikTok/ads tests (~$100–300) show strong CTR, or stop before district production |
@@ -254,16 +275,21 @@ no gacha, no custom backend, no more than 3 quality tiers. Each one needs data t
 | ID | Date | Decision | Rationale | Status |
 |---|---|---|---|---|
 | D-001 | 2026-11-08 | Chapters are 100 levels (10 districts × 10) | Clear progression, enough content runway, modular build | Adopted |
-| D-002 | 2026-11-08 | Next chapter unlocks at 5% of *qualified active* players, with a 21-day max wait | Keeps Onder's intent; fixes the denominator and protects superfans | Adopted (pending Onder's review) |
-| D-003 | 2026-11-08 | Visual quality tiers with gameplay parity; HD assets downloaded after install | Premium look on good phones without excluding budget Androids | Adopted |
+| D-002 | 2026-11-08 | Next chapter unlocks at 5% of *qualified active* players, with a 21-day max wait | Keeps Onder's intent; fixes the denominator and protects superfans | Adopted (confirmed by Onder) |
+| D-003 | 2026-11-08 | Visual quality tiers with gameplay parity; HD assets downloaded after install | Premium look on good phones without excluding budget phones | Adopted |
 | D-004 | 2026-11-08 | Engine: Godot 4 if the stress test passes, else Unity 6 | AI-friendliness vs. ad-SDK maturity and enemy-count performance | Open |
 | D-005 | 2026-11-08 | Story via motion comics + Turkish VO for key scenes | Dizi feel at solo-builder cost | Adopted |
 | D-006 | 2026-11-08 | Branch-and-bottleneck narrative; triangle targets the highest-bond girl | Meaningful choice at affordable scope | Adopted |
 | D-007 | 2026-11-08 | 2D, top-down 3/4 view, **portrait** orientation; skeletal heroes, flipbook enemies | One-thumb play; cheapest path to premium hero animation; best low-end performance | Adopted |
 | D-008 | 2026-11-08 | Content data as Godot custom Resources (`.tres`) in per-city packs | Typed, text-based (AI-editable), editor-friendly; city-as-data | Adopted |
 | D-009 | 2026-11-08 | Two level types: Route (corridor + hold zones) and Arena (survive the timer) | Route sells the "walk home" journey; Arena keeps the genre core | Adopted |
-| D-010 | 2026-11-08 | Enemies/projectiles as a data-oriented swarm (SoA + spatial hash + MultiMesh), no node per enemy | Only realistic path to 300+ enemies on budget Androids | Adopted |
+| D-010 | 2026-11-08 | Enemies/projectiles as a data-oriented swarm (SoA + spatial hash + MultiMesh), no node per enemy | Only realistic path to 300+ enemies on budget phones | Adopted |
 | D-011 | 2026-11-08 | Operating model: Opus = lead/reviewer, separate executor model, milestone review gates | Speed of execution plus a consistent design authority | Adopted |
+| D-012 | 2026-11-08 | Game title: recommended *No Signal: Istanbul* (see §1.1); code name *Project Istanbul* | Story-native, global, franchises as `<Title>: <City>` | **Proposed** (needs trademark/store checks + Onder's pick) |
+| D-013 | 2026-11-08 | Main character names: Arda, Kaan, Mila, Ada (+ Selim, Leyla, Hasan Dede) | Real Turkish names that are easy to read and say worldwide (narrative.md) | Adopted |
+| D-014 | 2026-11-08 | iOS first; Android port before any big Turkish growth push | Owner hardware and accounts, higher spend per player; Turkey is Android-heavy | Adopted |
+| D-015 | 2026-11-08 | Executor chosen by bake-off (execution-plan.md §2) | Pick by evidence, not by brand | Adopted |
+| D-016 | 2026-11-08 | Monetization designed into game systems: deterministic purchases, Monthly Card, Road Pass, Bazaar, rewarded ads only (business-plan.md) | Fair PvE monetization that funds the game without hurting retention or trust | Adopted |
 
 ## 18. Open Questions
 
@@ -271,4 +297,4 @@ no gacha, no custom backend, no more than 3 quality tiers. Each one needs data t
 2. Exact gate threshold: is 5% right once real funnel data exists?
 3. Hand-painted 2D style direction (D-007 settles 2D): pick from style frames in M4.
 4. Self-publish vs. publisher deal: decide after the demand test.
-5. Name: is *Son Durak* clear and searchable enough on stores worldwide?
+5. Final game title (D-012): run the §1.1 checks, then pick.

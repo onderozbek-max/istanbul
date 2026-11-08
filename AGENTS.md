@@ -1,7 +1,7 @@
 # AGENTS.md: Instructions for Coding Agents
 
-**Project:** *Son Durak* ("Last Stop"), a story-driven survivor-like mobile game set in a
-zombie-overrun Istanbul. Portrait, one-thumb, Godot 4, Android + iOS.
+**Project:** *Project Istanbul* (code name; game title in `docs/product.md` §1.1), a story-driven survivor-like mobile game set in a
+zombie-overrun Istanbul. Portrait, one-thumb, Godot 4, **iOS first** (Android later).
 **Current goal:** the vertical slice (Chapter 1, Levels 1–30). See `docs/prd.md`.
 
 ## Read these first, in this order
@@ -12,7 +12,8 @@ zombie-overrun Istanbul. Portrait, one-thumb, Godot 4, Android + iOS.
 5. `docs/content-catalog.md`: starting numbers for all content
 6. `docs/design-system.md`: visual and UX rules, readability, game feel, accessibility
 7. `docs/level-001-istiklal.md`: the opening level in full detail
-8. `docs/narrative.md` and `docs/product.md`: story and strategy (context; guardrails are binding)
+8. `docs/narrative.md`, `docs/product.md` and `docs/business-plan.md`: story, strategy and
+   monetization (context; guardrails and monetization principles are binding)
 
 ## Source-of-truth rules
 - **Docs own intent.** Once implemented, `game/content/**/*.tres` owns the numbers.

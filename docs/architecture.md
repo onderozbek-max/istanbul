@@ -1,4 +1,4 @@
-# Son Durak: Architecture and Design Patterns
+# Project Istanbul: Architecture and Design Patterns
 
 > **Status:** v0.1 · 2026-11-08 · Owns: tech stack, project layout, code patterns, dependency
 > rules, testing, performance budgets, engine pitfalls.
@@ -187,7 +187,7 @@ interface + fake/local implementation now, real SDK adapter later. Registered in
 ### 4.16 Telemetry
 - `Telemetry.log(event: String, fields: Dictionary)` → `AnalyticsSink`.
 - Slice sink: JSONL at `user://telemetry/<date>_<session_id>.jsonl`; flushed every 5 s and on pause/quit.
-- Export: settings → "Export playtest data" (share sheet); dev builds also via adb pull.
+- Export: settings → "Export playtest data" (share sheet); dev builds also expose `user://telemetry` through iOS file sharing (Files app / Finder).
 - Event schema: game-design.md §10. A test asserts every emitted event name is in the schema.
 
 ### 4.17 Quality tiers
